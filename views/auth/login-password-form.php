@@ -24,23 +24,19 @@ if ($request->is_logged_in()) {
       <main role="main">
         <div>
           <h1>Login form</h1>
-          <form name='login' action="<?= APP_URL . '/actions/login.php' ?>" method="post">
+          <form name='login' action="<?= APP_URL ?>/views/auth/password-form.php" method="post">
             <div class="form-field">
               <label for="email">Email:</label>
               <input type="text" name="email" id="email" value="<?= old("email") ?>" />
               <span class="error"><?= error("email") ?></span>
             </div>
             <div class="form-field">
-              <label for="password">Password:</label>
-              <input type="password" name="password" id="password" />
-              <span class="error"><?= error("password") ?></span>
-            </div>
-            <div class="form-field">
               <label></label>
               <input class="btn btn-primary" type="submit" name="submit" value="Login" />
+              
               <a class="btn btn-light" href="<?= APP_URL . "/" ?>" >Cancel</a>
             </div>
-            <a class="nav-link" href="<?= APP_URL ?>/views/auth/login-password-form.php">Forgotten password?</a>
+        
         </form>
         </div>
       </main>

@@ -7,11 +7,9 @@ use BookWorms\Model\Role;
 
 try {
   $rules = [
-    "name" => "present|minlength:4|maxlength:64",
+    "user_id" => "present",
     "email" => "present|email|minlength:7|maxlength:64",
-    "password" => "present|minlength:8|maxlength:64",
-    "address" => "present|minlength:10|maxlength:256",
-    "phone" => "present|minlength:4|maxlength:64"
+    "password" => "present|minlength:8|maxlength:64"
   ];
 
   $request->validate($rules);
@@ -23,26 +21,14 @@ try {
   $email = $request->input("email");
   $password = $request->input("password");
   $name = $request->input("name");
-  $address = $request->input("address"); 
-  $phone = $request->input("phone"); 
-  $role_id = 4;
-  $user = User::findByEmail($email);
-  if ($user !== null) {
-      $request->set_error("email", "Email address is already registered");
-  }
+  $id = $request->input("user_id");
 
-  $user = new User();
+  $user = User::findByID($id);
   $user->email = $email;
   $user->password = password_hash($password, PASSWORD_DEFAULT);
   $user->name = $name;
-  $user->role_id = $role_id;
   $user->save();
 
-  $customer = new Customer();
-  $customer->address = $address;
-  $customer->phone = $phone;
-  $customer->user_id = $user->id;
-  $customer->save();
   
   $request->session()->set('email', $user->email);
   $request->session()->set('name', $user->name);

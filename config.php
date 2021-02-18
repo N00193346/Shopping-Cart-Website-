@@ -1,5 +1,5 @@
 <?php
-define('APP_URL', 'http://localhost/shopping-cart-website-N00193346/');
+define('APP_URL', 'http://localhost/AWDD/shopping-cart-website-N00193346/');
 define("UPLOAD_DIR", "uploads");
 
 define('DB_SERVER', 'localhost');
