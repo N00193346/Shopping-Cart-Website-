@@ -18,7 +18,7 @@
       <main role="main">
         <div>
           <h1>Register form</h1>   
-          <form name='register' action="<?= APP_URL . '/actions/register.php' ?>" method="post">
+          <form name='register' action="<?= APP_URL . '/actions/register.php' ?>" method="post" enctype="multipart/form-data">
 
           
           <div class="form-field">

@@ -4,7 +4,7 @@
 use BookWorms\Model\User;
 use BookWorms\Model\Customer;
 use BookWorms\Model\Role;
-use BookWorms\Http\Image;
+use BookWorms\Model\Image;
 use BookWorms\Http\FileUpload;
 
 try {
@@ -21,8 +21,6 @@ try {
   if (!$request->is_valid()) {
     throw new Exception("Form not completed");
   }
-  else {
-
 
   $file = new FileUpload("image_id");
   $file_path = $file->get();
@@ -63,7 +61,7 @@ try {
 
   $request->redirect("/views/customer/home.php");
 }
-}
+
 
 catch(Exception $ex) {
   $request->session()->set("flash_message", $ex->getMessage());

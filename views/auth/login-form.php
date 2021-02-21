@@ -24,7 +24,7 @@ if ($request->is_logged_in()) {
       <main role="main">
         <div>
           <h1>Login form</h1>
-          <form name='login' action="<?= APP_URL . '/actions/login.php' ?>" method="post">
+          <form name='login' action="<?= APP_URL . '/actions/login.php' ?>" method="post" >
             <div class="form-field">
               <label for="email">Email:</label>
               <input type="text" name="email" id="email" value="<?= old("email") ?>" />
