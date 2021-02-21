@@ -3,7 +3,7 @@ define('APP_URL', 'http://localhost/AWDD/shopping-cart-website-N00193346/');
 define("UPLOAD_DIR", "uploads");
 
 define('DB_SERVER', 'localhost');
-define('DB_DATABASE', 'login');
+define('DB_DATABASE', 'app_store');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 

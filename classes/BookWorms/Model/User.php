@@ -10,6 +10,7 @@ class User {
     public $password;
     public $name;
     public $role_id;
+    public $image_id;
 
     function __construct() {
         $this->id = null;
@@ -25,13 +26,14 @@ class User {
                 ":email" => $this->email,
                 ":password" => $this->password,
                 ":name" => $this->name,
-                ":role_id" => $this->role_id
+                ":role_id" => $this->role_id,
+                ":image_id" => $this->image_id
             ];
             if ($this->id === null) {
-                $sql = "INSERT INTO users (email, password, name, role_id) VALUES (:email, :password, :name, :role_id)";
+                $sql = "INSERT INTO users (email, password, name, role_id, image_id) VALUES (:email, :password, :name, :role_id, :image_id)";
             }
             else {
-                $sql = "UPDATE users SET email = :email, password = :password, name = :name, role_id = :role_id WHERE id = :id" ;
+                $sql = "UPDATE users SET email = :email, password = :password, name = :name, role_id = :role_id, image_id = :image_id WHERE id = :id" ;
                 $params[":id"] = $this->id;
             }
             $stmt = $conn->prepare($sql);

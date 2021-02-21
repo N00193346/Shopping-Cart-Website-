@@ -39,12 +39,11 @@
               <span class="error"><?= error("password") ?></span>
             </div>
 
-           
-                <div class="form-field">
-                <label for="address" class="mt-2">Address:</label>
-                    <textarea name="address" id="address"  rows="5"><?= old('address') ?></textarea>
-                    <span class="error"><?= error('address') ?></span>
-                </div>
+            <div class="form-field">
+             <label for="address" class="mt-2">Address:</label>
+                <textarea name="address" id="address"  rows="5"><?= old('address') ?></textarea>
+                <span class="error"><?= error('address') ?></span>
+            </div>
 
             <div class="form-field">
               <label for="phone">Phone:</label>
@@ -52,8 +51,14 @@
               <span class="error"><?= error("phone") ?></span>
             </div>
 
-    
+
+            <div class="form-field">
+              <label for="image_id" class="mt-2">Profile Image:</label>
+              <input type="file" name="image_id" id="image_id"/>
+              <span class="error"><?= error('image_id') ?></span>
             </div>
+
+            
 
             <div class="form-field">
               <label>  </label>

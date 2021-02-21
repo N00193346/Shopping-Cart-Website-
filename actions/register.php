@@ -4,6 +4,8 @@
 use BookWorms\Model\User;
 use BookWorms\Model\Customer;
 use BookWorms\Model\Role;
+use BookWorms\Http\Image;
+use BookWorms\Http\FileUpload;
 
 try {
   $rules = [
@@ -19,7 +21,15 @@ try {
   if (!$request->is_valid()) {
     throw new Exception("Form not completed");
   }
+  else {
 
+
+  $file = new FileUpload("image_id");
+  $file_path = $file->get();
+  $image = new Image();
+  $image->filename = $file_path;
+  $image->save();
+  
   $email = $request->input("email");
   $password = $request->input("password");
   $name = $request->input("name");
@@ -36,6 +46,7 @@ try {
   $user->password = password_hash($password, PASSWORD_DEFAULT);
   $user->name = $name;
   $user->role_id = $role_id;
+  $user->image_id = $image_id;
   $user->save();
 
   $customer = new Customer();
@@ -51,6 +62,7 @@ try {
   $request->session()->forget("flash_errors");
 
   $request->redirect("/views/customer/home.php");
+}
 }
 
 catch(Exception $ex) {
