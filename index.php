@@ -1,5 +1,22 @@
 <?php require_once 'config.php'; ?>
+
 <?php 
+use BookWorms\Model\Product;
+use BookWorms\Model\Image;
+?>
+<?php
+try {
+    $request->session()->forget("flash_data");
+    $request->session()->forget("flash_errors");
+    $products = Product::findAll();
+}
+catch (Exception $ex){
+    $request->session()->set("flash_message", $ex->getMessage());
+     $request->session()->set("flash_message_class", "alert-warning");
+    $festivals = [];
+    
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,15 +46,31 @@
             blandit vitae enim. Pellentesque quis tortor quis nulla hendrerit porta. 
             Proin facilisis ac nibh in hendrerit.
           </p>
-          <p>
-            Pellentesque orci dui, consectetur non nisi vitae, imperdiet condimentum 
-            neque. Cras ullamcorper arcu eget dui consectetur interdum. Cras ac ex ut 
-            odio sollicitudin ultrices. Nam dapibus mi dictum tellus dignissim ornare. 
-            Quisque scelerisque tellus eu nunc rhoncus aliquet et et quam. Etiam id 
-            pretium purus. Aliquam ullamcorper, sapien vitae tempor vulputate, lacus 
-            ante sollicitudin leo, nec tempus lacus felis vitae nisi.
-          </p>
         </div>
+
+        <?php foreach ($products as $product) { ?>
+        <div class="card" style="width: 18rem;">
+        <?php $image = Image::findById($product->image_id);
+        if ($image !== null){
+          ?>
+          <img src="<?= APP_URL . "/" . $image->filename ?>" width="50px" alt="image" />
+          <?php  } 
+            ?>
+          <div class="card-body">
+            <h5 class="card-title"><?= $product->brand ?></h5>
+            <h5 class="card-title"><?= $product->model ?></h5>
+            <h5 class="card-title">€<?= $product->price ?></h5>
+            <p class="card-text"><?= $product->description ?></p>
+            <?php  } 
+            ?>
+        
+      
+        </div>
+      
+        
+
+
+
       </main>
       <?php require 'include/footer.php'; ?>
     </div>

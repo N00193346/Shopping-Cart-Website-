@@ -30,6 +30,9 @@ if ($role !== "admin") {
             Hello, <?= $request->session()->get("name") ?>
           </p>
         </div>
+
+        <a class="btn btn-primary" href="<?= APP_URL ?>/views/admin/product-create.php">Add Product</a>
+
       </main>
       <?php require 'include/footer.php'; ?>
     </div>
