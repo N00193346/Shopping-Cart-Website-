@@ -48,12 +48,15 @@ catch (Exception $ex){
           </p>
         </div>
 
+
+        <div class="card-columns">
         <?php foreach ($products as $product) { ?>
-        <div class="card" style="width: 18rem;">
+        <div class="card mb-3" style="width: 18rem;">
+    
         <?php $image = Image::findById($product->image_id);
         if ($image !== null){
           ?>
-          <img src="<?= APP_URL . "/" . $image->filename ?>" width="50px" alt="image" />
+          <img src="<?= APP_URL . "/actions/" . $image->filename ?>" width="270px" alt="image" />
           <?php  } 
             ?>
           <div class="card-body">
@@ -61,11 +64,14 @@ catch (Exception $ex){
             <h5 class="card-title"><?= $product->model ?></h5>
             <h5 class="card-title">€<?= $product->price ?></h5>
             <p class="card-text"><?= $product->description ?></p>
+          </div>
+          </div>
             <?php  } 
             ?>
+          </div>
         
       
-        </div>
+      
       
         
 

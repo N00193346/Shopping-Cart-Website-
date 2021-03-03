@@ -120,6 +120,7 @@ class Product {
                     $product->model = $row['model'];
                     $product->price = $row['price'];
                     $product->description = $row['description'];
+                    $product->image_id = $row['image_id'];
                     $products[] = $product;
 
                     $row = $select_stmt->fetch(PDO::FETCH_ASSOC);

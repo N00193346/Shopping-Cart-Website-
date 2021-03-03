@@ -25,7 +25,7 @@ class FileUpload {
     else {
       $this->destination = rtrim($destination, DIRECTORY_SEPARATOR);;
     }
-    $this->maxSize = 1 * 1024 * 1024; // 1 MB
+    $this->maxSize = 8 * 1024 * 1024; // 1 MB
     $this->allowedExtensions = array("jpg", "jpeg", "png", "gif");
     $this->overWrite = TRUE;
     $this->file = null;
