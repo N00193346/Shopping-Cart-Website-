@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= APP_URL ?>/actions/logout.php">Logout</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= APP_URL ?>/views/cart-view.php">View Cart</a>
+        </li>
       <?php } ?>
     </ul>
   </div>

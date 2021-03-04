@@ -47,7 +47,7 @@
 
             <div class="form-field">
               <label for="phone">Phone:</label>
-              <input type="phone" name="phone" id="phone" />
+              <input type="phone" name="phone" id="phone" value="<?= old("phone") ?>" />
               <span class="error"><?= error("phone") ?></span>
             </div>
 

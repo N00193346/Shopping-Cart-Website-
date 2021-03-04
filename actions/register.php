@@ -33,17 +33,17 @@ try {
   $name = $request->input("name");
   $address = $request->input("address"); 
   $phone = $request->input("phone"); 
-  $role_id = 4;
   $user = User::findByEmail($email);
   if ($user !== null) {
-      $request->set_error("email", "Email address is already registered");
+      throw new Exception("Email address is already registered");
   }
 
+  $role = Role::findByTitle("customer");
   $user = new User();
   $user->email = $email;
   $user->password = password_hash($password, PASSWORD_DEFAULT);
   $user->name = $name;
-  $user->role_id = $role_id;
+  $user->role_id = $role->id;
   $user->image_id = $image_id;
   $user->save();
 

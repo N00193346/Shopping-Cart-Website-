@@ -65,6 +65,9 @@ catch (Exception $ex){
             <h5 class="card-title">€<?= $product->price ?></h5>
             <p class="card-text"><?= $product->description ?></p>
           </div>
+          <form nethod  = "post" action="<?= APP_URL ?>/actions/cart-add.php ">
+            <input type="hidden" name="id" value="<?= $product->id ?>"/>
+            <button type="submit" class="btn btn-primary">Add to cart</button>
           </div>
             <?php  } 
             ?>
