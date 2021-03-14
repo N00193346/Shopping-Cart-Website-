@@ -29,10 +29,10 @@ try {
   }
 
   $cart = Cart::get($request);
-  $cart->add($product, 1);
+  $cart->remove($product, 1);
 
 
-  $request->session()->set("flash_message", "" .$product->brand. ": " .$product->model. " has been added to the cart");
+  $request->session()->set("flash_message", "" .$product->brand. ": " .$product->model. " has been removed from the cart");
   $request->session()->set("flash_message_class", "alert-info");
   
   $request->redirect("/views/cart-view.php");

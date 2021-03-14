@@ -65,20 +65,18 @@ catch (Exception $ex){
             <h5 class="card-title">€<?= $product->price ?></h5>
             <p class="card-text"><?= $product->description ?></p>
           </div>
-          <form nethod  = "post" action="<?= APP_URL ?>/actions/cart-add.php ">
-            <input type="hidden" name="id" value="<?= $product->id ?>"/>
-            <button type="submit" class="btn btn-primary">Add to cart</button>
+          <li class="list-group-item">
+            <form method="post" action="<?= APP_URL ?>/actions/cart-add.php ">
+              <input type="hidden" name="id" value="<?= $product->id ?>"/>
+              <button type="submit" class="btn btn-primary">Add to cart</button>
+            </form>
+          </li>
           </div>
             <?php  } 
             ?>
           </div>
         
-      
-      
-      
-        
-
-
+    
 
       </main>
       <?php require 'include/footer.php'; ?>

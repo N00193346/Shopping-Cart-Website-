@@ -56,24 +56,17 @@ $cart = Cart::get($request);
                 <td class="text-center">
                 <form method="post">
                   <input type="hidden" name="id" value="<?= $item->product->id ?>" />
-                  <button class="btn btn-light"
-                    type="submit"
-                    formaction="<?= APP_URL ?>/actions/cart-remove.php"
-                  >&lt;</button>
+                  <button class="btn btn-light" type="submit" formaction="<?= APP_URL ?>/actions/cart-remove.php">&lt;</button>
                   <span class="ml-2 mr-2"><?= $item->quantity ?></span>
-                  <button 
-                    class="btn btn-light"
-                    type="submit"
-                    formaction="<?= APP_URL ?>/actions/cart-add.php"
-                  >&gt;</button>
+                  <button class="btn btn-light" type="submit"formaction="<?= APP_URL ?>/actions/cart-add.php">&gt;</button>
               </form>
               </td>
-              <td class="text-right"><?= (intval($item->product->price)) * (intval($item->quantity)) ?></td>
+              <td class="text-right">€<?= (intval($item->product->price)) * (intval($item->quantity)) ?></td>
             </tr>
             <?php } ?>
             <tr>
                 <th colspan="3">Total amount due</th>
-                <th class="text-right"><?= $total ?></th>
+                <th class="text-right">€<?= $total ?></th>
             </tr>
           </tbody>
         </table>
@@ -84,7 +77,7 @@ $cart = Cart::get($request);
       </main>
       <?php require 'include/footer.php'; ?>
     </div>
-    <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
-    <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script> -->
   </body>
 </html>
