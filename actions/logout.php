@@ -5,6 +5,7 @@ if (!$request->is_logged_in()) {
 }
 $request->session()->forget('email');
 $request->session()->forget('name');
+$request->session()->forget('id');
 $request->session()->forget('role');
 
 $request->redirect("/index.php");

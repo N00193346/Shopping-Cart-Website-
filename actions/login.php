@@ -32,6 +32,7 @@ try {
 
   $request->session()->set('email', $user->email);
   $request->session()->set('name', $user->name);
+  $request->session()->set('id', $user->id);
   $request->session()->set('role', $role->title);
   $request->session()->forget("flash_data");
   $request->session()->forget("flash_errors");
