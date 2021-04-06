@@ -10,6 +10,7 @@ if ($role !== "customer") {
 
 use BookWorms\Model\Product;
 use BookWorms\Model\Order;
+use BookWorms\Model\OrderDetails;
 use BookWorms\Model\Cart;
 use BookWorms\Model\Customer;
 
@@ -20,26 +21,37 @@ if ($cart->empty()) {
 }
 
 $total = 0;
+$quantity = 0;
+//Find total cost of order
 foreach ($cart->items as $item) {
 $total += (intval($item->product->price)) * (intval($item->quantity));
 }
-
+//Finding quantity of order
+foreach ($cart->items as $item) {
+  $quantity +=  (intval($item->quantity));
+  }
 $customer_id = $request->session()->get("id");
 
 
 try {
-//   $rules = [
-//     "id" => "present",
-//   ];
-
-//   $request->validate($rules);
-//   if ($request->is_valid()) {
   
+  //Create Order
   $order = new Order();
   $order->customer_id = $customer_id;
- 
   $order->total = $total; 
   $order->save();
+  
+
+
+  //Create Order details
+  foreach ($cart->items as $item) {
+    $order_details = new OrderDetails();
+    $order_details->order_id = $order->id;
+    $order_details->product_id = (Product::findByModel($item->product->model))->id;
+    $order_details->quantity = $item->quantity;
+    $order_details->save();
+  }
+
 
   $request->session()->set("flash_message", "Purchase Completed");
   $request->session()->set("flash_message_class", "alert-info");

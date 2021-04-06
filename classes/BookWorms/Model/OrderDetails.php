@@ -4,11 +4,11 @@ namespace BookWorms\Model;
 use Exception;
 use PDO;
 
-    class Order {
+    class OrderDetails {
         public $id;
-        public $customer_id;
-        public $date;
-        public $total;
+        public $order_id;
+        public $product_id;
+        public $quantity;
   
     
         function __construct() {
@@ -22,16 +22,16 @@ use PDO;
                 $conn = $db->get_connection();
     
                 $params = [
-                    ":customer_id" => $this->customer_id,
-                    ":date" => $this->date,
-                    ":total" => $this->total
+                    ":order_id" => $this->order_id,
+                    ":product_id" => $this->product_id,
+                    ":quantity" => $this->quantity
                  
                 ];
                 if ($this->id === null) {
-                    $sql = "INSERT INTO orders (customer_id, date, total) VALUES (:customer_id, :date, :total)";
+                    $sql = "INSERT INTO order_details (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
                 }
                 else {
-                    $sql = "UPDATE orders SET customer_id = :customer_id, date = :date, total = :total WHERE id = :id" ;
+                    $sql = "UPDATE order_details SET order_id = :order_id, product_id = :product_id, quantity = :quantity WHERE id = :id" ;
                     $params[":id"] = $this->id;
                 }
                 $stmt = $conn->prepare($sql);
@@ -44,7 +44,7 @@ use PDO;
                 }
     
                 if ($stmt->rowCount() !== 1) {
-                    throw new Exception("Failed to save order.");
+                    throw new Exception("Failed to save order details.");
                 }
     
                 if ($this->id === null) {

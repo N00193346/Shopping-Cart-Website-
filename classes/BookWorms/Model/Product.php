@@ -215,4 +215,44 @@ class Product {
 
         return $product;
     }
+
+    public static function findByModel($model) {
+        $product = null;
+
+        try {
+            $db = new DB();
+            $db->open();
+            $conn = $db->get_connection();
+
+            $select_sql = "SELECT * FROM products WHERE model = :model";
+            $select_params = [
+                ":model" => $model
+            ];
+            $select_stmt = $conn->prepare($select_sql);
+            $select_status = $select_stmt->execute($select_params);
+
+            if (!$select_status) {
+                $error_info = $select_stmt->errorInfo();
+                $message = "SQLSTATE error code = ".$error_info[0]."; error message = ".$error_info[2];
+                throw new Exception("Database error executing database query: " . $message);
+            }
+
+            if ($select_stmt->rowCount() !== 0) {
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                $product = new Product();
+                $product->id = $row['id'];
+                $product->brand = $row['brand'];
+                $product->model = $row['model'];
+                $product->price = $row['price'];
+                $product->description = $row['description'];
+            }
+        }
+        finally {
+            if ($db !== null && $db->is_open()) {
+                $db->close();
+            }
+        }
+
+        return $product;
+    }
 }
