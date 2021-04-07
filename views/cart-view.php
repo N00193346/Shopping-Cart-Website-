@@ -70,7 +70,7 @@ $cart = Cart::get($request);
             </tr>
           </tbody>
         </table>
-        <a href="<?= APP_URL ?>/actions/order-store.php" class="btn btn-primary">Checkout</a>
+        <a href="<?= APP_URL ?>/views/checkout.php" class="btn btn-primary">Checkout</a>
         <?php } ?>
 
         </div>

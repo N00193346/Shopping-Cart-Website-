@@ -13,12 +13,44 @@ use BookWorms\Model\Order;
 use BookWorms\Model\OrderDetails;
 use BookWorms\Model\Cart;
 use BookWorms\Model\Customer;
+use BookWorms\Model\CreditCard;
 
 $cart = Cart::get($request);
 
 if ($cart->empty()) {
   $request->redirect("/views/cart-view.php");
 }
+
+
+try {
+//   $rules = [
+//     "type" => "present",
+//     "name" => "present|minlength:4|maxlength:64",
+//     "card_number" => "present|minlength:12|maxlength:12",
+//     "cvc" => "present|minlength:3|maxlength:3",
+//     "exp_month" => "present|minlength:2|maxlength:2",
+//     "exp_year" => "present|minlength:2|maxlength:4"
+//   ];
+//   $request->validate($rules);
+
+
+//  if ($request->is_valid()) {
+    $type = $request->input("type");
+    $name = $request->input("name");
+    $card_number = $request->input("card_number");
+    $cvc = $request->input("cvc");
+    $exp_month = $request->input("exp_month");
+    $exp_year = $request->input("exp_year");
+
+  $credit_card = new CreditCard();
+  $credit_card->type = $type;
+  $credit_card->name = $name;
+  $credit_card->card_number = $card_number;
+  $credit_card->cvc = $cvc;
+  $credit_card->exp_month = $exp_month;
+  $credit_card->exp_year = $exp_year;
+  $credit_card->save();
+
 
 $total = 0;
 $quantity = 0;
@@ -32,8 +64,6 @@ foreach ($cart->items as $item) {
   }
 $customer_id = $request->session()->get("id");
 
-
-try {
   
   //Create Order
   $order = new Order();
