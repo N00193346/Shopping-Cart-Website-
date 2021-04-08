@@ -1,35 +1,33 @@
 <?php
-use BookWorms\Model\User;
-use BookWorms\Model\Customer;
+use BookWorms\Model\Order;
 
-$customers = Customer::findAll();
-$numCustomers = count($customers);
+$orders = Order::findAll();
+$numOrders = count($orders);
 $pageSize = 10;
-$numPages = ceil($numCustomers / $pageSize);
+$numPages = ceil($numOrders / $pageSize);
 ?>
-<table class="table" id="table-customers">
+<table class="table" id="table-orders">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>User Id</th>
-        
+            <th>Customer Id</th>
+            <th>Date</th>
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($customers as $customer) { ?>
+        <?php foreach ($orders as $order) { ?>
             <tr class="d-none">
-                <td><?= $customer->id ?></td>
-                <td><?= $customer->address ?></td>
-                <td><?= $customer->phone ?></td>
-                <td><?= $customer->user_id ?></td>
+                <td><?= $order->id ?></td>
+                <td><?= $order->customer_id ?></td>
+                <td><?= $order->date ?></td>
+                <td>€<?= $order->total ?></td>
                
             </tr>
         <?php } ?>
     </tbody>
 </table>
-<nav id="nav-customers">
+<nav id="nav-orders">
     <ul class="pagination justify-content-center">
         <li class="page-item">
             <a class="page-link" href="#" data-page="previous">

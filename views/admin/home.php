@@ -69,10 +69,10 @@ if ($role !== "admin") {
               <?php require 'views/admin/products/index.php'; ?>
             </div>
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-            <h2> orders</h2>
+            <?php require 'views/admin/orders/index.php'; ?>
             </div>
             <div class="tab-pane fade" id="customers" role="tabpanel" aria-labelledby="customers-tab">
-              <h2>Customers</h2>
+            <?php require 'views/admin/customers/index.php'; ?>
             </div>
           </div>
         </div>
@@ -83,5 +83,6 @@ if ($role !== "admin") {
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
     <script src="<?= APP_URL ?>/assets/js/products.js"></script>
     <script src="<?= APP_URL ?>/assets/js/orders.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/customers.js"></script>
   </body>
 </html>
