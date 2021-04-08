@@ -10,12 +10,15 @@ if ($role !== "customer") {
 }
 
 use BookWorms\Model\Cart;
+use BookWorms\Model\CreditCard;
 $cart = Cart::get($request);
+
 if ($cart->empty()) {
   $request->redirect("/views/cart-view.php");
 }
 
-
+$customer_id = $request->session()->get("customer_id");
+$credit_card = CreditCard::findByCustomerId($customer_id);
 
 ?>
 <!doctype html>
@@ -37,13 +40,51 @@ if ($cart->empty()) {
       <main role="main">
         <div>
           <h1>Checkout</h1>
+
+          <?php if ($credit_card !== null) {
+            
+            ?>
+          <div class="col">
+          <h1>Saved card</h1>
+          <form method="get">
+
+
+              <div class="form-field" hidden>
+              <input type="radio" checked name="id" value="<?= $credit_card->id ?>" />
+              </div>
+
+              <label for="type" class="mt-2">Type</label>
+              <div class="form-field">
+                <input type="text" name="type" id="type" value="<?= $credit_card->type ?>" disabled>
+              </div>
+
+              <label for="name" class="mt-2">Name</label>
+              <div class="form-field">
+                <input type="text" name="name" id="name" disabled value="<?= $credit_card->name ?>" />
+              </div>
+
+              <label for="card_number" class="mt-2">Card Number</label>
+              <div class="form-field">
+                <input type="text" name="card_number" id="card_number" disabled value="<?= $credit_card->card_number ?>" />
+              </div>
+
+              <label for="exp_mont" class="mt-2">Expiry Month</label>
+              <div class="form-field">
+                <input type="text" name="exp_month" id="exp_month" disabled value="<?= $credit_card->exp_month ?>" />
+              </div>
+
+              <label for="exp_year" class="mt-2">Expiry Year</label>
+              <div class="form-field">
+                <input type="text" name="exp_year" id="exp_year" disabled value="<?= $credit_card->exp_year ?>" />
+              </div>    
+
+              <?php } ?>
+              </form>
+
+          <h1>Use new Card</h1>
           <form method="post" action="<?= APP_URL ?>/actions/order-store.php" >
-
-
-
-        
                 <label for="type">Card type:</label>
-                <select class="form-control" name="type" id="type">
+                <select class="form-control col-md6" name="type" id="type">
                   <option value="mastercard" <?= chosen("type", "mastercard") ? "selected" : "" ?>>Master Card</option>
                   <option value="visa" <?= chosen("type", "visa") ? "selected" : "" ?>>Visa</option>
                 </select>
@@ -80,7 +121,13 @@ if ($cart->empty()) {
                     <span class="error"><?= error('exp_year') ?></span>
                 </div>
 
-    
+                <label for="save">Would you like to save your card for future purchases?:</label>
+                <select class="form-control" name="save" id="save">
+                  <option value="yes" <?= chosen("save", "yes") ? "selected" : "" ?>>Yes</option>
+                  <option value="no" <?= chosen("save", "no") ? "selected" : "" ?>>No</option>
+                </select>
+                <span class="error"><?= error("save") ?></span>
+              </div>
                 
                
                 <label></label>

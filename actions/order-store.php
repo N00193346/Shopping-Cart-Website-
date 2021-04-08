@@ -15,14 +15,19 @@ use BookWorms\Model\Cart;
 use BookWorms\Model\Customer;
 use BookWorms\Model\CreditCard;
 
+//Get contents of cart
 $cart = Cart::get($request);
+//Get customers id from session
 
+//If the cart is empty redirect the customer
 if ($cart->empty()) {
   $request->redirect("/views/cart-view.php");
 }
 
 
 try {
+
+  $customer_id = $request->session()->get("customer_id");
 //   $rules = [
 //     "type" => "present",
 //     "name" => "present|minlength:4|maxlength:64",
@@ -41,6 +46,8 @@ try {
     $cvc = $request->input("cvc");
     $exp_month = $request->input("exp_month");
     $exp_year = $request->input("exp_year");
+    $save = $request->input("save");
+    
 
   $credit_card = new CreditCard();
   $credit_card->type = $type;
@@ -49,6 +56,10 @@ try {
   $credit_card->cvc = $cvc;
   $credit_card->exp_month = $exp_month;
   $credit_card->exp_year = $exp_year;
+  if ($save === "yes"){
+  $credit_card->customer_id = $customer_id;
+  }
+
   $credit_card->save();
 
 
@@ -62,8 +73,6 @@ $total += (intval($item->product->price)) * (intval($item->quantity));
 foreach ($cart->items as $item) {
   $quantity +=  (intval($item->quantity));
   }
-$customer_id = $request->session()->get("id");
-
   
   //Create Order
   $order = new Order();

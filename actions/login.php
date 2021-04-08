@@ -3,6 +3,7 @@
 
 use BookWorms\Model\User;
 use BookWorms\Model\Role;
+use BookWorms\Model\Customer;
 
 if ($request->is_logged_in()) {
   $role = $request->session()->get("role");
@@ -32,8 +33,12 @@ try {
 
   $request->session()->set('email', $user->email);
   $request->session()->set('name', $user->name);
-  $request->session()->set('id', $user->id);
   $request->session()->set('role', $role->title);
+  //If the role is customer, get customer id
+  if ($role->title === "customer"){
+    $customer = Customer::findByUserId($user->id);
+    $request->session()->set('customer_id', $customer->id);
+  }
   $request->session()->forget("flash_data");
   $request->session()->forget("flash_errors");
 
