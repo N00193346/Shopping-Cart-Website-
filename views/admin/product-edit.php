@@ -1,5 +1,8 @@
 <?php require_once '../../config.php'; ?>
 <?php
+use BookWorms\Model\Product;
+use BookWorms\Model\Image;
+
 if (!$request->is_logged_in()) {
   $request->redirect("/views/auth/login-form.php");
 }
@@ -8,12 +11,35 @@ if ($role !== "admin") {
   $request->redirect("/actions/logout.php");
 }
 ?>
+<?php
+try {
+    $rules = [
+        'id' => 'present|integer|min:1'
+    ];
+    $request->validate($rules);
+    if (!$request->is_valid()) {
+        throw new Exception("Illegal request");
+    }
+    $id = $request->input('id');
+    $product = Product::findById($id);
+    if ($product === null) {
+        throw new Exception("Illegal request parameter");
+        }
+    }
+    catch (Exception $ex) {
+    $request->session()->set("flash_message", $ex->getMessage());
+    $request->session()->set("flash_message_class", "alert-warning");
+
+    $request->redirect("/admin/home.php");
+    }
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Book Worms - Create Product</title>
+    <title>Book Worms - Edit Product</title>
 
     <link href="<?= APP_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?= APP_URL ?>/assets/css/template.css" rel="stylesheet">
@@ -28,33 +54,34 @@ if ($role !== "admin") {
           
       <div class="row">
           <div class="col table-responsive">
-          <h1>Create New Product</h1>
+          <h1>Edit Product</h1>
             <form method="post" 
-                  action="<?= APP_URL . '/actions/product-store.php' ?>"
+                  action="<?= APP_URL . '/actions/product-update.php' ?>"
                   enctype="multipart/form-data">
 
-                  
+                <input type="hidden" name="id" value="<?= $product->id ?>" />  
+
                 <label for="brand" class="mt-2">Brand</label>
                 <div class="form-field">
-                    <input type="text" name="brand" id="brand" value="<?= old('brand') ?>" />
+                    <input type="text" name="brand" id="brand" value="<?= old('brand', $product->brand) ?>" />
                     <span class="error"><?= error('brand') ?></span>
                 </div>
 
                 <label for="model" class="mt-2">Model</label>
                 <div class="form-field">
-                    <input type="text" name="model" id="model" value="<?= old('model') ?>" />
+                    <input type="text" name="model" id="model" value="<?= old('model', $product->model) ?>" />
                     <span class="error"><?= error('model') ?></span>
                 </div>
 
                 <label for="price" class="mt-2">Price(€)</label>
                 <div class="form-field">
-                    <input type="text" name="price" id="price" value="<?= old('price') ?>" />
+                    <input type="text" name="price" id="price" value="<?= old('price', $product->price) ?>" />
                     <span class="error"><?= error('price') ?></span>
                 </div>
 
                 <label for="description" class="mt-2">Description</label>
                 <div class="form-field">
-                    <textarea name="description" id="description"  cols="147" rows="5"><?= old('description') ?></textarea>
+                    <textarea name="description" id="description"  cols="147" rows="5"><?= old('description', $product->description) ?></textarea>
                     <span class="error"><?= error('description') ?></span>
                 </div>
 
@@ -70,6 +97,14 @@ if ($role !== "admin") {
 
                 <div class="form-field">
                     <label for="image_id" class="mt-2">Product Image:</label>
+                    <?php
+                    $image = Image::findById($product->image_id);
+                    if ($image !== null){
+                    ?>
+                    <img src="<?= APP_URL . "/" . $image->filename ?>" width="150px" />
+                    <?php
+                    }
+                    ?>
                     <input type="file" name="image_id" id="image_id"/>
                     <span class="error"><?= error('image_id') ?></span>
                 </div>

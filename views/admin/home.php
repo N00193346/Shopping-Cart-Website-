@@ -76,6 +76,7 @@ if ($role !== "admin") {
             </div>
           </div>
           <a class="btn btn-primary" href="<?= APP_URL ?>/views/admin/product-create.php">Add Product</a>
+        
         </div>
       </main>
       <?php require 'include/footer.php'; ?>
@@ -85,5 +86,6 @@ if ($role !== "admin") {
     <script src="<?= APP_URL ?>/assets/js/products.js"></script>
     <script src="<?= APP_URL ?>/assets/js/orders.js"></script>
     <script src="<?= APP_URL ?>/assets/js/customers.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/deletequery.js"></script>
   </body>
 </html>
