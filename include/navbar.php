@@ -26,9 +26,16 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= APP_URL ?>/actions/logout.php">Logout</a>
         </li>
+        <?php $role = $request->session()->get("role");
+              if ($role !== "admin") {?>
         <li class="nav-item">
           <a class="nav-link" href="<?= APP_URL ?>/views/cart-view.php">View Cart</a>
         </li>
+        <?php } else { ?>
+          <li class="nav-item">
+          <a class="nav-link" href="<?= APP_URL ?>/views/admin/home.php">Admin Tools</a>
+        </li>
+      <?php } ?>
       <?php } ?>
     </ul>
   </div>

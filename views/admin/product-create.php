@@ -58,6 +58,16 @@ if ($role !== "admin") {
                     <span class="error"><?= error('description') ?></span>
                 </div>
 
+                <div>
+                <label for="category">Category</label>
+                <select class="form-control" name="category" id="category">
+                  <option value="guitar" <?= chosen("category", "guitar") ? "selected" : "" ?>>Guitar</option>
+                  <option value="bass" <?= chosen("category", "bass") ? "selected" : "" ?>>Bass</option>
+                  <option value="drums" <?= chosen("category", "drums") ? "selected" : "" ?>>Drums</option>
+                </select>
+                <span class="error"><?= error("category") ?></span>
+              </div>
+
                 <div class="form-field">
                     <label for="image_id" class="mt-2">Product Image:</label>
                     <input type="file" name="image_id" id="image_id"/>

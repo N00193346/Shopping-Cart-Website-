@@ -75,6 +75,7 @@ if ($role !== "admin") {
             <?php require 'views/admin/customers/index.php'; ?>
             </div>
           </div>
+          <a class="btn btn-primary" href="<?= APP_URL ?>/views/admin/product-create.php">Add Product</a>
         </div>
       </main>
       <?php require 'include/footer.php'; ?>

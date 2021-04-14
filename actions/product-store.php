@@ -12,7 +12,8 @@ try {
     "brand" => "present",
     "model" => "present",
     "price" => "present",
-    "description" => "present"
+    "description" => "present",
+    "category" => "present"
   ];
 
   $request->validate($rules);
@@ -29,6 +30,7 @@ try {
   $product->price = $request->input("price");
   $product->description = $request->input("description");
   $product->image_id = $image->id;
+  $product->category = $request->input("category");
   $product->save();
 
   $request->session()->set("flash_message", "The product was successfully added to the database");

@@ -80,8 +80,6 @@ foreach ($cart->items as $item) {
   $order->total = $total; 
   $order->save();
   
-
-
   //Create Order details
   foreach ($cart->items as $item) {
     $order_details = new OrderDetails();

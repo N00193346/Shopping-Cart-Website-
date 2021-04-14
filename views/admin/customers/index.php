@@ -11,6 +11,7 @@ $numPages = ceil($numCustomers / $pageSize);
     <thead>
         <tr>
             <th>Id</th>
+            <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
             <th>User Id</th>
@@ -21,6 +22,15 @@ $numPages = ceil($numCustomers / $pageSize);
         <?php foreach ($customers as $customer) { ?>
             <tr class="d-none">
                 <td><?= $customer->id ?></td>
+                <?php
+                try{
+                  $user = User::findById($customer->user_id);
+                }
+                catch(Exception $e){}
+                if ($user !== null){
+                ?>
+                <td><?= $user->name ?></td> 
+                <?php } ?>
                 <td><?= $customer->address ?></td>
                 <td><?= $customer->phone ?></td>
                 <td><?= $customer->user_id ?></td>
