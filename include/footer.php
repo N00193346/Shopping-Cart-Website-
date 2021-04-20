@@ -1,3 +1,6 @@
-<footer class="bg-light">
-  <h6>&copy; Book Worms</h6>
-</footer>
+<footer class="footer">
+            <div class="footer__brand">
+                  <p>©Incredible Instruments</p>
+            </div>
+        </footer>
+        

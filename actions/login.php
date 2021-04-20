@@ -43,7 +43,7 @@ try {
   $request->session()->forget("flash_errors");
 
 
-  $request->redirect("/views"."/".$role->title."/home.php");  
+  $request->redirect("views"."/".$role->title."/home.php");  
 }
 catch (Exception $ex) {
   $request->session()->set("flash_message", $ex->getMessage());
@@ -51,6 +51,6 @@ catch (Exception $ex) {
   $request->session()->set("flash_data", $request->all());
   $request->session()->set("flash_errors", $request->errors());
 
-  $request->redirect("/views/auth/login-form.php");  
+  $request->redirect("views/auth/login-form.php");  
 }
 ?>
