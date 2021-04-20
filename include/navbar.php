@@ -1,42 +1,35 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#div-navbar-items" aria-controls="div-navbar-items" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="div-navbar-items">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="<?= APP_URL ?>/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= APP_URL ?>/views/about.php">About us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= APP_URL ?>/views/contact.php">Contact us</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <?php if (!$request->session()->has("email")) { ?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= APP_URL ?>/views/auth/login-form.php">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= APP_URL ?>/views/auth/register-form.php">Register</a>
-      </li>
-      <?php } else { ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= APP_URL ?>/actions/logout.php">Logout</a>
-        </li>
-        <?php $role = $request->session()->get("role");
+<!--        Bootstrap Nav Bar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Incredible Instruments</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="<?= APP_URL ?>">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<?= APP_URL ?>/views/about.php">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<?= APP_URL ?>/views/contact.php">Contact</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <?php if (!$request->session()->has("email")) { ?>
+                <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/auth/login-form.php">Log In</a>
+                <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/auth/register-form.php">Register</a>
+              <?php } else { ?>
+                <a href="<?= APP_URL ?>/actions/logout.php">Logout</a>
+              <?php $role = $request->session()->get("role");
               if ($role !== "admin") {?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= APP_URL ?>/views/cart-view.php">View Cart</a>
-        </li>
-        <?php } else { ?>
-          <li class="nav-item">
-          <a class="nav-link" href="<?= APP_URL ?>/views/admin/home.php">Admin Tools</a>
-        </li>
-      <?php } ?>
-      <?php } ?>
-    </ul>
-  </div>
-</nav>
+                <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/cart-view.php">View Cart</a>
+              <?php } else { ?>
+                <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/admin/home.php">Admin Tools</a>
+                <?php } ?>
+               <?php } ?>
+            </form>
+          </div>
+        </nav>
