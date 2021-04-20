@@ -13,7 +13,7 @@ try {
 catch (Exception $ex){
     $request->session()->set("flash_message", $ex->getMessage());
      $request->session()->set("flash_message_class", "alert-warning");
-    $festivals = [];
+   
     
 }
 
@@ -68,6 +68,7 @@ catch (Exception $ex){
 <!--    Product Cards-->
         <div class="products">
         <?php foreach ($products as $product) { ?>
+          <a href="view-product.php?id=<?= $product->id?>">
             <div class="product__card">
             <?php $image = Image::findById($product->image_id);
                if ($image !== null){
@@ -79,12 +80,13 @@ catch (Exception $ex){
                     <div class="product__card__brand"><?= $product->brand ?></div>
                     <div class="product__card__model"><?= $product->model ?></div>
                     <div class="product__card__price">€<?= $product->price ?></div>
-                    <form method="post" action="<?= APP_URL ?>/actions/cart-add.php ">
+                    <form method="post" action="<?= APP_URL ?>/actions/cart-add.php">
                     <input type="hidden" name="id" value="<?= $product->id ?>"/>
                       <div class="product__card__button"><button type="submit" >Add to cart</button></div>
                     </form>
                 </footer>
             </div>
+            </a>
             <?php  } 
             ?>
         </div>
