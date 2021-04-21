@@ -40,17 +40,20 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Book Worms - Edit Product</title>
-
-    <link href="<?= APP_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?= APP_URL ?>/assets/css/template.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/mystyle.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="container">
-      <?php require 'include/header.php'; ?>
+   
+
       <?php require 'include/navbar.php'; ?>
       <?php require 'include/flash.php'; ?>
       <main role="main">
-        
+      <div class="cart breathe">
           
       <div class="row">
           <div class="col table-responsive">
@@ -109,10 +112,10 @@ try {
                     <span class="error"><?= error('image_id') ?></span>
                 </div>
                 
-               
+               <div class="margin"></div>
                 <label></label>
                 <button type="submit" class="btn btn-primary">Store</button>
-                <a class="btn btn-danger" href="<?= APP_URL ?>/views/admin/home.php">Cancel</a>
+                <a class="btn btn-danger" href="<?= APP_URL ?>//views/admin/home.php">Cancel</a>
              
         
             </form>
@@ -121,7 +124,7 @@ try {
        
 
       </main>
-      <?php require 'include/footer.php'; ?>
+      <?php require 'include/footer_stick.php'; ?>
     </div>
     <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>

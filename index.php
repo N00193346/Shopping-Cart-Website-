@@ -18,7 +18,6 @@ catch (Exception $ex){
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -76,15 +75,15 @@ catch (Exception $ex){
                 <div class="product__card__image" style="background-image: url('<?= APP_URL . "/actions/" . $image->filename ?>')"></div>
                 <?php  } 
                  ?>
-                <footer class="product__card--footer">
                     <div class="product__card__brand"><?= $product->brand ?></div>
                     <div class="product__card__model"><?= $product->model ?></div>
                     <div class="product__card__price">€<?= $product->price ?></div>
+                    <div class="test"></div>
                     <form method="post" action="<?= APP_URL ?>/actions/cart-add.php">
                     <input type="hidden" name="id" value="<?= $product->id ?>"/>
                       <div class="product__card__button"><button type="submit" >Add to cart</button></div>
                     </form>
-                </footer>
+        
             </div>
             </a>
             <?php  } 

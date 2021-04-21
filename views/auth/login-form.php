@@ -42,10 +42,10 @@ catch (Exception $ex){
 
         <main class="breathe">
 <!--        Home header-->
-      <div>
+      <div class="form">
           <h1>Login form</h1>
           <form name='login' action="<?= APP_URL . '/actions/login.php' ?>" method="post" >
-            <div class="form-field">
+            <div class="form-field space__l">
               <label for="email">Email:</label>
               <input type="text" name="email" id="email" value="<?= old("email") ?>" />
               <span class="error"><?= error("email") ?></span>
@@ -55,7 +55,7 @@ catch (Exception $ex){
               <input type="password" name="password" id="password" />
               <span class="error"><?= error("password") ?></span>
             </div>
-            <div class="form-field">
+            <div class="form-field space__l">
               <label></label>
               <input class="btn btn-primary" type="submit" name="submit" value="Login" />
               <a class="btn btn-light" href="<?= APP_URL . "/" ?>" >Cancel</a>
@@ -66,11 +66,7 @@ catch (Exception $ex){
 		</main>
         
         
-        <footer class="footer">
-            <div class="footer__brand">
-                  <p>©Incredible Instruments</p>
-            </div>
-        </footer>
+    <?php require 'include/footer_stick.php'; ?>
         
 	</body>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

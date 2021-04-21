@@ -26,7 +26,7 @@ $numPages = ceil($numProducts / $pageSize);
                 <td><?= $product->brand ?></td>
                 <td><?= $product->model ?></td>
                 <td>€<?= $product->price ?></td>
-                <td><a class="btn btn-primary" href="<?= APP_URL ?>/views/admin/product-edit.php?id=<?= $product->id ?>">Edit</a></td>
+                <td><a class="btn btn-primary" href="<?= APP_URL ?>views/admin/product-edit.php?id=<?= $product->id ?>">Edit</a></td>
                 <td><a class="btn btn-danger btn-delete" href="<?= APP_URL ?>/actions/product-delete.php?id=<?= $product->id ?>">Delete</a></td>
             </tr>
         <?php } ?>
