@@ -11,6 +11,9 @@ class Product {
     public $price;
     public $description;
     public $image_id;
+    public $image_id2;
+    public $image_id3;
+    public $image_id4;
     public $category;
 
     function __construct() {
@@ -29,13 +32,16 @@ class Product {
                 ":price" => $this->price,
                 ":description" => $this->description,
                 ":image_id" => $this->image_id,
+                ":image_id2" => $this->image_id2,
+                ":image_id3" => $this->image_id3,
+                ":image_id4" => $this->image_id4,
                 ":category" => $this->category
             ];
             if ($this->id === null) {
-                $sql = "INSERT INTO products (brand, model, price, description, image_id, category) VALUES (:brand, :model, :price, :description, :image_id, :category)";
+                $sql = "INSERT INTO products (brand, model, price, description, image_id, image_id2, image_id3, image_id4, category) VALUES (:brand, :model, :price, :description, :image_id, :image_id2, :image_id3, :image_id4, :category)";
             }
             else {
-                $sql = "UPDATE products SET brand = :brand, model = :model, price = :price, description = :description, image_id = :image_id, category = :category WHERE id = :id" ;
+                $sql = "UPDATE products SET brand = :brand, model = :model, price = :price, description = :description, image_id = :image_id, image_id2 = :image_id2, image_id3 = :image_id3, image_id4 = :image_id4, category = :category WHERE id = :id" ;
                 $params[":id"] = $this->id;
             }
             $stmt = $conn->prepare($sql);
@@ -123,6 +129,9 @@ class Product {
                     $product->price = $row['price'];
                     $product->description = $row['description'];
                     $product->image_id = $row['image_id'];
+                    $product->image_id2 = $row['image_id2'];
+                    $product->image_id3 = $row['image_id3'];
+                    $product->image_id4 = $row['image_id4'];
                     $product->category = $row['category'];
                     $products[] = $product;
 
@@ -169,6 +178,9 @@ class Product {
                 $product->price = $row['price'];
                 $product->description = $row['description'];
                 $product->image_id = $row['image_id'];
+                $product->image_id2 = $row['image_id2'];
+                $product->image_id3 = $row['image_id3'];
+                $product->image_id4 = $row['image_id4'];
                 $product->category = $row['category'];
             }
         }
@@ -182,7 +194,7 @@ class Product {
     }
 
     public static function findByBrand($brand) {
-        $product = null;
+        $products = array();
 
         try {
             $db = new DB();
@@ -204,6 +216,7 @@ class Product {
 
             if ($select_stmt->rowCount() !== 0) {
                 $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                while ($row !== FALSE) {
                 $product = new Product();
                 $product->id = $row['id'];
                 $product->brand = $row['brand'];
@@ -211,7 +224,14 @@ class Product {
                 $product->price = $row['price'];
                 $product->description = $row['description'];
                 $product->image_id = $row['image_id'];
+                $product->image_id2 = $row['image_id2'];
+                $product->image_id3 = $row['image_id3'];
+                $product->image_id4 = $row['image_id4'];
                 $product->category = $row['category'];
+                $products[] = $product;
+
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                }
             }
         }
         finally {
@@ -220,7 +240,7 @@ class Product {
             }
         }
 
-        return $product;
+        return $products;
     }
 
     public static function findByModel($model) {
@@ -253,6 +273,9 @@ class Product {
                 $product->price = $row['price'];
                 $product->description = $row['description'];
                 $product->image_id = $row['image_id'];
+                $product->image_id2 = $row['image_id2'];
+                $product->image_id3 = $row['image_id3'];
+                $product->image_id4 = $row['image_id4'];
                 $product->category = $row['category'];
             }
         }
@@ -295,6 +318,9 @@ class Product {
                 $product->price = $row['price'];
                 $product->description = $row['description'];
                 $product->image_id = $row['image_id'];
+                $product->image_id2 = $row['image_id2'];
+                $product->image_id3 = $row['image_id3'];
+                $product->image_id4 = $row['image_id4'];
                 $product->category = $row['category'];
             }
         }

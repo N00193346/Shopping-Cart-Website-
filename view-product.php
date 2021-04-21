@@ -15,10 +15,15 @@ try {
   }
   $id = $request->input('id');
   $product = Product::findById($id);
+  $brand = $product->brand;
+  $relatedProducts = Product::findByBrand($brand);
   if ($product === null) {
       throw new Exception("Illegal request parameter");
       }
+
+  
   }
+
   catch (Exception $ex) {
   $request->session()->set("flash_message", $ex->getMessage());
   $request->session()->set("flash_message_class", "alert-warning");
@@ -54,14 +59,26 @@ try {
         <div class="main__product">
             <div class="main__product__images">
             <?php $image = Image::findById($product->image_id);
+                $image2 = Image::findById($product->image_id2);
+                $image3 = Image::findById($product->image_id3);
+                $image4 = Image::findById($product->image_id4);
                if ($image !== null){   ?>
                    <div class="main__image__large"><img src="<?= APP_URL . "/actions/" . $image->filename ?>" alt="" /></div>
                    <?php  } 
                    ?>
                 <div class="main__product__image__sub">
-                    <div class="main__product__image__sub__small"><img src="images/ibanez2.jpg" alt="" /></div>
-                    <div class="main__product__image__sub__small"><img src="images/ibanez3.jpg" alt="" /></div>
-                    <div class="main__product__image__sub__small"><img src="images/ibanez4.jpg" alt="" /></div>
+                <?php if ($image2 !== null){   ?>
+                    <div class="main__product__image__sub__small"><img src="<?= APP_URL . "/actions/" . $image2->filename ?>" alt="" /></div>
+                    <?php  } 
+                   ?>
+                 <?php if ($image3 !== null){   ?>
+                    <div class="main__product__image__sub__small"><img src="<?= APP_URL . "/actions/" . $image3->filename ?>" alt="" /></div>
+                    <?php  } 
+                   ?>
+                <?php if ($image4 !== null){   ?>
+                    <div class="main__product__image__sub__small"><img src="<?= APP_URL . "/actions/" . $image4->filename ?>" alt="" /></div>
+                    <?php  } 
+                   ?>
                 </div>
              
             </div>
@@ -103,17 +120,28 @@ try {
         
             
         <div class="products">
+        <?php foreach ($relatedProducts as $relatedProduct) { ?>
+          <a href="view-product.php?id=<?= $relatedProduct->id?>">
             <div class="product__card">
-                <div class="product__card__image" style="background-image: url('images/products/product1.jpg')"></div>
-                <footer class="product__card--footer">
-                    <div class="product__card__brand">Ibanez</div>
-                    <div class="product__card__model">RGA61AL-IAF</div>
-                    <div class="product__card__price">€1,159</div>
-                    <div class="product__card__button"><button>View Item</button></div>
-                </footer>
+            <?php $image = Image::findById($relatedProduct->image_id);
+               if ($image !== null){
+            ?>
+                <div class="product__card__image" style="background-image: url('<?= APP_URL . "/actions/" . $image->filename ?>')"></div>
+                <?php  } 
+                 ?>
+                    <div class="product__card__brand"><?= $relatedProduct->brand ?></div>
+                    <div class="product__card__model"><?= $relatedProduct->model ?></div>
+                    <div class="product__card__price">€<?= $relatedProduct->price ?></div>
+                    <div class="test"></div>
+                    <form method="post" action="<?= APP_URL ?>/actions/cart-add.php">
+                    <input type="hidden" name="id" value="<?= $relatedProduct->id ?>"/>
+                      <div class="product__card__button"><button type="submit" >Add to cart</button></div>
+                    </form>
+        
             </div>
-          
-      
+            </a>
+            <?php  } 
+            ?>
         </div>
         
         </main>

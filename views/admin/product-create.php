@@ -72,9 +72,27 @@ if ($role !== "admin") {
               </div>
 
                 <div class="form-field">
-                    <label for="image_id" class="mt-2">Product Image:</label>
+                    <label for="image_id" class="mt-2">Product Image (Main):</label>
                     <input type="file" name="image_id" id="image_id"/>
                     <span class="error"><?= error('image_id') ?></span>
+                </div>
+
+                <div class="form-field">
+                    <label for="image_id2" class="mt-2">Product Image 2:</label>
+                    <input type="file" name="image_id2" id="image_id2"/>
+                    <span class="error"><?= error('image_id2') ?></span>
+                </div>
+
+                <div class="form-field">
+                    <label for="image_id3" class="mt-2">Product Image 3:</label>
+                    <input type="file" name="image_id3" id="image_id3"/>
+                    <span class="error"><?= error('image_id3') ?></span>
+                </div>
+
+                <div class="form-field">
+                    <label for="image_id4" class="mt-2">Product Image 4:</label>
+                    <input type="file" name="image_id4" id="image_id4"/>
+                    <span class="error"><?= error('image_id4') ?></span>
                 </div>
                 
                
