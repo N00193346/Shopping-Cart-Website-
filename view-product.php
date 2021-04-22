@@ -86,9 +86,21 @@ try {
                  <div class="side__brand"><?= $product->brand ?></div>
                 <div class="side__model"><?= $product->model ?></div>
                 <div class="side__price">€<?= $product->price ?></div>
+                 <!-- If user is not an admin display form button -->
+                 <?php $role = $request->session()->get("role");
+                 if ($role !== "admin") {?>
+                <form method="post" action="<?= APP_URL ?>/actions/cart-add.php">
                 <input type="hidden" name="id" value="<?= $product->id ?>"/>
                  <div class="side__button"><button>Add to cart</button></div>
                  </form>
+                 <!-- Else display button to edit product -->
+                 <?php  } else { ?>
+                <form method="post" action="<?= APP_URL ?>views/admin/product-edit.php?id=<?= $product->id ?>">
+                <input type="hidden" name="id" value="<?= $product->id ?>"/>
+                 <div class="side__button"><button>Edit</button></div>
+                 </form>
+                 <?php  } 
+                 ?>
             </div>
         </div>
         
@@ -115,14 +127,16 @@ try {
             </div>
         </div>
         
-                
-        <div class="related">Related Products:</div>
+        
+        <div class="related">More from <?= $product->brand ?>:</div>
         
             
         <div class="products">
         <?php foreach ($relatedProducts as $relatedProduct) { ?>
-          <a href="view-product.php?id=<?= $relatedProduct->id?>">
-            <div class="product__card">
+            <?php if ($relatedProduct->id !== $product->id) { ?>
+           
+          <a href="view-product.php?id=<?= $relatedProduct->id?>" class="product__card">
+            
             <?php $image = Image::findById($relatedProduct->image_id);
                if ($image !== null){
             ?>
@@ -132,16 +146,24 @@ try {
                     <div class="product__card__brand"><?= $relatedProduct->brand ?></div>
                     <div class="product__card__model"><?= $relatedProduct->model ?></div>
                     <div class="product__card__price">€<?= $relatedProduct->price ?></div>
-                    <div class="test"></div>
+                    <div class="gap"></div>
+                     <!-- If user is not an admin display form button -->
+                     <?php $role = $request->session()->get("role");
+                    if ($role !== "admin") {?>
                     <form method="post" action="<?= APP_URL ?>/actions/cart-add.php">
                     <input type="hidden" name="id" value="<?= $relatedProduct->id ?>"/>
                       <div class="product__card__button"><button type="submit" >Add to cart</button></div>
                     </form>
+                    <?php  } 
+                    ?>
         
-            </div>
+            
             </a>
             <?php  } 
             ?>
+            <?php  } 
+            ?>
+           
         </div>
         
         </main>

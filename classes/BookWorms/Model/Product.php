@@ -289,7 +289,7 @@ class Product {
     }
 
     public static function findByCategory($category) {
-        $product = null;
+        $products = array();
 
         try {
             $db = new DB();
@@ -298,7 +298,7 @@ class Product {
 
             $select_sql = "SELECT * FROM products WHERE category = :category";
             $select_params = [
-                ":model" => $model
+                ":category" => $category
             ];
             $select_stmt = $conn->prepare($select_sql);
             $select_status = $select_stmt->execute($select_params);
@@ -311,6 +311,7 @@ class Product {
 
             if ($select_stmt->rowCount() !== 0) {
                 $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                while ($row !== FALSE) {
                 $product = new Product();
                 $product->id = $row['id'];
                 $product->brand = $row['brand'];
@@ -322,6 +323,10 @@ class Product {
                 $product->image_id3 = $row['image_id3'];
                 $product->image_id4 = $row['image_id4'];
                 $product->category = $row['category'];
+                $products[] = $product;
+
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                }
             }
         }
         finally {
@@ -330,6 +335,7 @@ class Product {
             }
         }
 
-        return $product;
+        return $products;
     }
+
 }

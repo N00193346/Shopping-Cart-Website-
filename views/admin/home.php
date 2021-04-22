@@ -86,7 +86,7 @@ if ($role !== "admin") {
         </div>
       </main>
 </div>
-      <?php require 'include/footer_stick.php'; ?>
+      <?php require 'include/footer.php'; ?>
     
     <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>

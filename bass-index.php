@@ -8,7 +8,8 @@ use BookWorms\Model\Image;
 try {
     $request->session()->forget("flash_data");
     $request->session()->forget("flash_errors");
-    $products = Product::findAll();
+    $category = "bass";
+    $products = Product::findByCategory($category);
 }
 catch (Exception $ex){
     $request->session()->set("flash_message", $ex->getMessage());
@@ -39,38 +40,15 @@ catch (Exception $ex){
   <?php require 'include/flash.php'; ?>
 
 
-        <main class="breathe">
-<!--        Home header-->
-         <div class="featured">
-				<div class="featured__item__large"  style="background-image: url('assets/img/popular.jpg')" >
-					 <div class="featured__item__text"><div>Most Popular</div>
-                        </div>
-				</div>
-                <a href ="<?= APP_URL ?>guitar-index.php" class="featured__item" style="background-image: url('assets/img/guitar.jpg')" >
-                       <div class="featured__item__text"><div>Guitars</div>
-                    </div>
-                </a>
-                <a href ="<?= APP_URL ?>bass-index.php" class="featured__item" style="background-image: url('assets/img/bass.jpg')">
-                        <div class="featured__item__text"><div>Bass</div>
-                    </div>
-                </a>
-                <a href ="<?= APP_URL ?>drum-index.php" class="featured__item" style="background-image: url('assets/img/drums.jpg')">
-                       <div class="featured__item__text"><div>Drums</div>
-                    </div>
-                </a>
-                
-		
-        </div>
-            
+        <main class="breathe">            
 <!--            Products Title-->
-            <div class="related">Featured Products:</div>
+            <div class="related">Bass Guitars:</div>
             
 <!--    Product Cards-->
         <div class="products">
-        <!-- Loop to display all products in array  -->
         <?php foreach ($products as $product) { ?>
-          <a href="view-product.php?id=<?= $product->id?>" class="product__card">
-            
+          <a href="view-product.php?id=<?= $product->id?>">
+            <div class="product__card">
             <?php $image = Image::findById($product->image_id);
                if ($image !== null){
             ?>
@@ -91,7 +69,7 @@ catch (Exception $ex){
                     <?php  } 
                     ?>
         
-            
+            </div>
             </a>
             <?php  } 
             ?>
