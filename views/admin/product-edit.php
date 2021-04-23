@@ -59,7 +59,7 @@ try {
           <div class="col table-responsive">
           <h1>Edit Product</h1>
             <form method="post" 
-                  action="<?= APP_URL . '/actions/product-update.php' ?>"
+                  action="<?= APP_URL .'actions/product-update.php' ?>"
                   enctype="multipart/form-data">
 
                 <input type="hidden" name="id" value="<?= $product->id ?>" />  
@@ -98,24 +98,71 @@ try {
                 <span class="error"><?= error("category") ?></span>
               </div>
 
-                <div class="form-field">
-                    <label for="image_id" class="mt-2">Product Image:</label>
+           
+                <div class="form-group">
+                    <label for="image_id" class="mt-2">Product Image(Main):</label>
                     <?php
                     $image = Image::findById($product->image_id);
                     if ($image !== null){
                     ?>
-                    <img src="<?= APP_URL . "/" . $image->filename ?>" width="150px" />
+                    <img src="<?= APP_URL . "/actions/". $image->filename ?>" width="150px" />
                     <?php
                     }
                     ?>
-                    <input type="file" name="image_id" id="image_id"/>
+                    <input type="file" name="image_id" id="image_id" value="<?= $product->image_id ?>"/>
                     <span class="error"><?= error('image_id') ?></span>
                 </div>
+
+
+                <div class="form-field">
+                    <label for="image_id2" class="mt-2">Product Image2:</label>
+                    <?php
+                    $image2 = Image::findById($product->image_id2);
+                    if ($image2 !== null){
+                    ?>
+                    <img src="<?= APP_URL . "/actions/" . $image2->filename ?>" width="150px" />
+                    <?php
+                    }
+                    ?>
+                    <input type="file" name="image_id2" id="image_id2" value="<?= $product->image_id2 ?>"/>
+                    <span class="error"><?= error('image_id2') ?></span>
+                </div>
+
+
+                <div class="form-field">
+                    <label for="image_id3" class="mt-2">Product Image3:</label>
+                    <?php
+                    $image3 = Image::findById($product->image_id3);
+                    if ($image3 !== null){
+                    ?>
+                    <img src="<?= APP_URL . "/actions/" . $image3->filename ?>" width="150px" />
+                    <?php
+                    }
+                    ?>
+                    <input type="file" name="image_id3" id="image_id3" value="<?= $product->image_id3 ?>/>
+                    <span class="error"><?= error('image_id3') ?></span>
+                </div>
+              
+                <div class="form-field">
+                    <label for="image_id4" class="mt-2">Product Image4:</label>
+                    <?php
+                    $image4 = Image::findById($product->image_id4);
+                    if ($image4 !== null){
+                    ?>
+                    <img src="<?= APP_URL . "/actions/" . $image4->filename ?>" width="150px" />
+                    <?php
+                    }
+                    ?>
+                    <input type="file" name="image_id4" id="image_id4" value="<?= $product->image_id4 ?>/>
+                    <span class="error"><?= error('image_id4') ?></span>
+                </div>
+               
+
                 
                <div class="margin"></div>
                 <label></label>
                 <button type="submit" class="btn btn-primary">Store</button>
-                <a class="btn btn-danger" href="<?= APP_URL ?>//views/admin/home.php">Cancel</a>
+                <a class="btn btn-danger" href="<?= APP_URL ?>/views/admin/home.php">Cancel</a>
              
         
             </form>

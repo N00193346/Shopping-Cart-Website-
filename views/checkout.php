@@ -118,6 +118,7 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
           </table>
         </div>
 
+        <!-- Credit new card -->
         <div class="col">
         <div class="space__l"></div>
           <h1>Use new Card</h1>
@@ -181,7 +182,7 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
       </main>
       <?php require 'include/footer.php'; ?>
     </div>
-    <!-- <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
-    <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script> -->
+    <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
