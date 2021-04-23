@@ -107,7 +107,7 @@ foreach ($cart->items as $item) {
   $request->session()->set("flash_data", $request->all());
   $request->session()->set("flash_errors", $request->errors());
 
-  $request->redirect("/views/cart-view.php");
+  $request->redirect("/views/checkout.php");
 }
 
 ?>

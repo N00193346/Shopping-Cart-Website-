@@ -1,12 +1,12 @@
 <?php require_once '../config.php'; ?>
 <?php
-if (!$request->is_logged_in()) {
-  $request->redirect("/views/auth/login-form.php");
-}
-$role = $request->session()->get("role");
-if ($role !== "customer") {
-  $request->redirect("/views/" .$role. "/home.php");
-}
+// if (!$request->is_logged_in()) {
+//   $request->redirect("/views/auth/login-form.php");
+// }
+// $role = $request->session()->get("role");
+// if ($role !== "customer") {
+//   $request->redirect("/views/" .$role. "/home.php");
+// }
 
 use BookWorms\Model\Cart;
 

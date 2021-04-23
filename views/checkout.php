@@ -18,7 +18,8 @@ if ($cart->empty()) {
 }
 
 $customer_id = $request->session()->get("customer_id");
-$credit_card = CreditCard::findByCustomerId($customer_id);
+// Find credit cards related to customer Id
+$credit_cards = CreditCard::findByCustomerId($customer_id);
 
 ?>
 <!doctype html>
@@ -26,61 +27,98 @@ $credit_card = CreditCard::findByCustomerId($customer_id);
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Book Worms - Checkout</title>
-
-    <link href="<?= APP_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?= APP_URL ?>/assets/css/template.css" rel="stylesheet">
-    <link href="<?= APP_URL ?>/assets/css/form.css" rel="stylesheet">
+    <title>Incredible Instruments - Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/mystyle.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  </head>
   </head>
   <body>
-    <div class="container">
-      <?php require 'include/header.php'; ?>
+
       <?php require 'include/navbar.php'; ?>
       <?php require 'include/flash.php'; ?>
+
+      <div class="featured">
       <main role="main">
         <div>
           <h1>Checkout</h1>
 
-          <?php if ($credit_card !== null) {
+          <div class="space__l"></div>
+          <!-- If the customer has credit cards -->
+          <?php if ($credit_cards !== null) {
             
             ?>
           <div class="col">
           <h1>Saved card</h1>
-          <form method="get">
-
-
+          <!-- Loop through credit cards -->
+          <?php foreach ($credit_cards as $credit_card) { ?>
+            <form method="post" action="<?= APP_URL ?>/actions/order-store.php">
+          <!-- First get the put the credit card information into a insivle form that will be used to the checkout process -->
               <div class="form-field" hidden>
               <input type="radio" checked name="id" value="<?= $credit_card->id ?>" />
               </div>
-
-              <label for="type" class="mt-2">Type</label>
-              <div class="form-field">
-                <input type="text" name="type" id="type" value="<?= $credit_card->type ?>" disabled>
+              <div class="form-field" hidden>
+              <input type="text" name="cvc" id="cvc" value="<?= $credit_card->cvc ?>" />
               </div>
-
-              <label for="name" class="mt-2">Name</label>
-              <div class="form-field">
-                <input type="text" name="name" id="name" disabled value="<?= $credit_card->name ?>" />
+              <div class="form-field" hidden>
+                <input type="text" name="type" id="type"  value="<?= $credit_card->type ?>" >
               </div>
-
-              <label for="card_number" class="mt-2">Card Number</label>
-              <div class="form-field">
-                <input type="text" name="card_number" id="card_number" disabled value="<?= $credit_card->card_number ?>" />
+              <div class="form-field" hidden>
+                <input type="text" name="name" id="name"  value="<?= $credit_card->name ?>" />
               </div>
-
-              <label for="exp_mont" class="mt-2">Expiry Month</label>
-              <div class="form-field">
-                <input type="text" name="exp_month" id="exp_month" disabled value="<?= $credit_card->exp_month ?>" />
+              <div class="form-field" hidden>
+                <input type="text" name="card_number" id="card_number" value="<?= $credit_card->card_number ?>" />
               </div>
-
-              <label for="exp_year" class="mt-2">Expiry Year</label>
-              <div class="form-field">
-                <input type="text" name="exp_year" id="exp_year" disabled value="<?= $credit_card->exp_year ?>" />
-              </div>    
-
-              <?php } ?>
+              <div class="form-field" hidden>
+                <input type="text" name="exp_month" id="exp_month" value="<?= $credit_card->exp_month ?>" />
+              </div>
+              <div class="form-field" hidden>
+                <input type="text" name="exp_year" id="exp_year"  value="<?= $credit_card->exp_year ?>" />
+              </div>
+              <table class="table" id="table-credit_cards">
+              <!-- Create table to display credit card info -->
+              <thead>
+                  <tr>
+                      <th>Type</th>
+                      <th>Name on Card</th>
+                      <th>Card Number</th>
+                      <th>Expiry Month</th>
+                      <th>Expiry Year</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <!-- Cycle through the credit card info again to display to the user
+              This reason this is done twice is because the disabled info cannot be passed into the form -->
+              <td>
+                <input disabled value="<?= $credit_card->type ?>" >
+              </td>
+              <td>
+                <input  disabled value="<?= $credit_card->name ?>" />
+              </td>
+              <td>
+                <input  disabled value="<?= $credit_card->card_number ?>" />
+              </td>
+              <td>
+                <input disabled value="<?= $credit_card->exp_month ?>" />
+              </td>
+              <td>
+                <input  disabled value="<?= $credit_card->exp_year ?>" />
+              </td>
+              <td>
+              <!-- Submit the hidden values -->
+              <button type="submit" class="btn btn-primary">Use this Card</button> 
+              </td>
               </form>
+              <?php } ?>
+              <?php } ?>
+        
+          </table>
+        </div>
 
+        <div class="col">
+        <div class="space__l"></div>
           <h1>Use new Card</h1>
           <form method="post" action="<?= APP_URL ?>/actions/order-store.php" >
                 <label for="type">Card type:</label>
@@ -129,12 +167,12 @@ $credit_card = CreditCard::findByCustomerId($customer_id);
                 <span class="error"><?= error("save") ?></span>
               </div>
                 
-               
+               <div class="space__l"></div>
                 <label></label>
                 <button type="submit" class="btn btn-primary">Checkout</button>
                 <a class="btn btn-default" href="<?= APP_URL ?>/views/cart-view.php">Cancel</a>
             </form>
-         
+          </div>
      
        
 
