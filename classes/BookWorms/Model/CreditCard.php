@@ -97,8 +97,51 @@ class CreditCard {
         }
     }
 
+    public static function findAll() {
+        $credit_cards = array();
+
+        try {
+            $db = new DB();
+            $db->open();
+            $conn = $db->get_connection();
+
+            $select_sql = "SELECT * FROM credit_card";
+            $select_stmt = $conn->prepare($select_sql);
+            $select_status = $select_stmt->execute();
+
+            if (!$select_status) {
+                $error_info = $select_stmt->errorInfo();
+                $message = "SQLSTATE error code = ".$error_info[0]."; error message = ".$error_info[2];
+                throw new Exception("Database error executing database query: " . $message);
+            }
+
+            if ($select_stmt->rowCount() !== 0) {
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                while ($row !== FALSE) {
+                $credit_card = new CreditCard();
+                $credit_card->id = $row['id'];
+                $credit_card->type = $row['type'];
+                $credit_card->name = $row['name'];
+                $credit_card->card_number = $row['card_number'];
+                $credit_card->exp_month = $row['exp_month'];
+                $credit_card->exp_year = $row['exp_year'];
+                $credit_cards[] = $credit_card;
+
+                    $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                }
+            }
+        }
+        finally {
+            if ($db !== null && $db->is_open()) {
+                $db->close();
+            }
+        }
+
+        return $credit_cards;
+    }
+
     public static function findByCustomerId($customer_id) {
-        $credit_card = array();
+        $credit_cards = array();
 
         try {
             $db = new DB();
@@ -120,6 +163,7 @@ class CreditCard {
 
             if ($select_stmt->rowCount() !== 0) {
                 $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                while ($row !== FALSE) {
                 $credit_card = new CreditCard();
                 $credit_card->id = $row['id'];
                 $credit_card->type = $row['type'];
@@ -128,6 +172,9 @@ class CreditCard {
                 $credit_card->exp_month = $row['exp_month'];
                 $credit_card->exp_year = $row['exp_year'];
                 $credit_cards[] = $credit_card;
+
+                    $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                }
             }
         }
         finally {
@@ -139,5 +186,47 @@ class CreditCard {
         return $credit_cards;
     }
 
+
+    public static function findByCardNumber($card_number) {
+        $credit_card = null;
+
+        try {
+            $db = new DB();
+            $db->open();
+            $conn = $db->get_connection();
+
+            $select_sql = "SELECT * FROM credit_card WHERE card_number = :card_number";
+            $select_params = [
+                ":card_number" => $card_number
+            ];
+            $select_stmt = $conn->prepare($select_sql);
+            $select_status = $select_stmt->execute($select_params);
+
+            if (!$select_status) {
+                $error_info = $select_stmt->errorInfo();
+                $message = "SQLSTATE error code = ".$error_info[0]."; error message = ".$error_info[2];
+                throw new Exception("Database error executing database query: " . $message);
+            }
+
+            if ($select_stmt->rowCount() !== 0) {
+                $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                $credit_card = new CreditCard();
+                $credit_card->id = $row['id'];
+                $credit_card->type = $row['type'];
+                $credit_card->name = $row['name'];
+                $credit_card->card_number = $row['card_number'];
+                $credit_card->exp_month = $row['exp_month'];
+                $credit_card->exp_year = $row['exp_year'];
+            
+            }
+        }
+        finally {
+            if ($db !== null && $db->is_open()) {
+                $db->close();
+            }
+        }
+
+        return $credit_card;
+    }
    
 }

@@ -20,6 +20,7 @@ if ($cart->empty()) {
 $customer_id = $request->session()->get("customer_id");
 // Find credit cards related to customer Id
 $credit_cards = CreditCard::findByCustomerId($customer_id);
+// $credit_cards = CreditCard::findAll();
 
 ?>
 <!doctype html>
@@ -143,7 +144,7 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
 
                 <label for="cvc" class="mt-2">Cvc</label>
                 <div class="form-field">
-                    <input type="text" name="cvc" id="cvc" value="<?= old('cvc') ?>" />
+                    <input type="password" name="cvc" id="cvc" value="<?= old('cvc') ?>" />
                     <span class="error"><?= error('cvc') ?></span>
                 </div>
 

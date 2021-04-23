@@ -26,7 +26,7 @@ if ($cart->empty()) {
 
 
 try {
-
+//Get Customer Id from sessions
   $customer_id = $request->session()->get("customer_id");
 //   $rules = [
 //     "type" => "present",
@@ -40,6 +40,8 @@ try {
 
 
 //  if ($request->is_valid()) {
+  //Getting variables from passed form 
+    $id = $request->input("id");
     $type = $request->input("type");
     $name = $request->input("name");
     $card_number = $request->input("card_number");
@@ -47,8 +49,12 @@ try {
     $exp_month = $request->input("exp_month");
     $exp_year = $request->input("exp_year");
     $save = $request->input("save");
-    
+  
+  //Check if credit card uses already exists in database
+  $check_credit_card = CreditCard::findByCardNumber($card_number);
 
+  // If credit card does not exist, create in database
+  if ($check_credit_card === null) {
   $credit_card = new CreditCard();
   $credit_card->type = $type;
   $credit_card->name = $name;
@@ -56,12 +62,15 @@ try {
   $credit_card->cvc = $cvc;
   $credit_card->exp_month = $exp_month;
   $credit_card->exp_year = $exp_year;
+  //If the user wants to save credit card for future purchases, assign it to their account 
   if ($save === "yes"){
   $credit_card->customer_id = $customer_id;
   }
-
   $credit_card->save();
+  }
 
+//If the user did not use a saved credit card, we want replace the id variable with id of the credit card just created
+// $id = $credit_card->id;
 
 $total = 0;
 $quantity = 0;
@@ -77,6 +86,14 @@ foreach ($cart->items as $item) {
   //Create Order
   $order = new Order();
   $order->customer_id = $customer_id;
+
+  //If the there was no credit card in the database, use the of the credit card created
+  if ($check_credit_card === null) {
+  $order->credit_card_id = $credit_card->id;
+  //Else use the id passed from the saved card
+  } else {
+  $order->credit_card_id = $id;
+  }
   $order->total = $total; 
   $order->save();
   

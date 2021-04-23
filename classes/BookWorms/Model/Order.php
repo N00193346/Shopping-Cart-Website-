@@ -7,6 +7,7 @@ use PDO;
     class Order {
         public $id;
         public $customer_id;
+        public $credit_card_id;
         public $date;
         public $total;
   
@@ -23,15 +24,16 @@ use PDO;
     
                 $params = [
                     ":customer_id" => $this->customer_id,
+                    ":credit_card_id" => $this->credit_card_id,
                     ":date" => $this->date,
                     ":total" => $this->total
                  
                 ];
                 if ($this->id === null) {
-                    $sql = "INSERT INTO orders (customer_id, date, total) VALUES (:customer_id, :date, :total)";
+                    $sql = "INSERT INTO orders (customer_id, credit_card_id, date, total) VALUES (:customer_id, :credit_card_id, :date, :total)";
                 }
                 else {
-                    $sql = "UPDATE orders SET customer_id = :customer_id, date = :date, total = :total WHERE id = :id" ;
+                    $sql = "UPDATE orders SET customer_id = :customer_id, credit_card_id = :credit_card_id, date = :date, total = :total WHERE id = :id" ;
                     $params[":id"] = $this->id;
                 }
                 $stmt = $conn->prepare($sql);
@@ -82,6 +84,7 @@ use PDO;
                         $order = new Order();
                         $order->id = $row['id'];
                         $order->customer_id = $row['customer_id'];
+                        $order->credit_card_id = $row['credit_card_id'];
                         $order->date = $row['date'];
                         $order->total = $row['total'];
                         $orders[] = $order;
