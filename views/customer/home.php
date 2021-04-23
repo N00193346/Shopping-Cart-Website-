@@ -31,9 +31,56 @@ if ($role !== "customer") {
             Hello, <?= $request->session()->get("name") ?>
           </p>
         </div>
+
+        <div class="cart margin">
+      <main role="breathe">
+          <ul class="nav nav-tabs" id="tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" 
+                 id="orders-tab" 
+                 data-toggle="tab" 
+                 href="#orders" 
+                 role="tab" 
+                 aria-controls="orders" 
+                 aria-selected="true"
+              >
+                Orders
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" 
+                 id="credit_cards-tab" 
+                 data-toggle="tab" 
+                 href="#credit_cards" 
+                 role="tab" 
+                 aria-controls="credit_cards" 
+                 aria-selected="false"
+              >
+              Credit Cards
+              </a>
+            </li>
+            </li>
+
+     
+          </ul>
+          <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+              <?php require 'views/customer/orders/index.php'; ?>
+            </div>
+            <div class="tab-pane fade" id="credit_cards" role="tabpanel" aria-labelledby="credit_cards-tab">
+              <?php require 'views/customer/credit_cards/index.php'; ?>
+            </div>
+           
+          </div>
+          
+        
+        </div>
       </main>
       <?php require 'include/footer_stick.php'; ?>
     
+ 
+    <script src="<?= APP_URL ?>/assets/js/orders.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/credit_cards.js"></script>
     <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
   </body>

@@ -28,6 +28,7 @@
               <?php $role = $request->session()->get("role");
               if ($role !== "admin") {?>
                 <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/cart-view.php">View Cart</a>
+                <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>/views/customer/home.php">My Profile</a>
               <?php } else { ?>
                 <a class="btn button_background my-2 my-sm-0 margin" href="<?= APP_URL ?>views/admin/home.php">Admin Tools</a>
                 <?php } ?>

@@ -98,7 +98,7 @@ class CreditCard {
     }
 
     public static function findByCustomerId($customer_id) {
-        $credit_card = null;
+        $credit_card = array();
 
         try {
             $db = new DB();
@@ -127,6 +127,7 @@ class CreditCard {
                 $credit_card->card_number = $row['card_number'];
                 $credit_card->exp_month = $row['exp_month'];
                 $credit_card->exp_year = $row['exp_year'];
+                $credit_cards[] = $credit_card;
             }
         }
         finally {
@@ -135,7 +136,7 @@ class CreditCard {
             }
         }
 
-        return $credit_card;
+        return $credit_cards;
     }
 
    
