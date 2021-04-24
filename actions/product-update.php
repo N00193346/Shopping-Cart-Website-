@@ -17,6 +17,7 @@ try {
     "category" => "present"
   ];
 
+
   $request->validate($rules);
   if ($request->is_valid()) {
 
@@ -64,23 +65,15 @@ try {
   $product->description = $request->input("description");
   if ($image !== null) {
       $product->image_id = $image->id;
-  } else{
-    $product->image_id = $request->input("image_id");
   }
   if ($image2 !== null) {
     $product->image_id2 = $image2->id;
-  } else{
-    $product->image_id2 = $request->input("image_id2");
   }
   if ($image3 !== null) {
     $product->image_id3 = $image3->id;
-  } else {
-    $product->image_id3 = $request->input("image_id3");
   }
   if ($image4 !== null) {
     $product->image_id4 = $image4->id;
-  } else {
-    $product->image_id3 = $request->input("image_id4");
   }
  
   $product->category = $request->input("category");

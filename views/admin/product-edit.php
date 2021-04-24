@@ -109,7 +109,7 @@ try {
                     <?php
                     }
                     ?>
-                    <input type="file" name="image_id" id="image_id" value="<?= $product->image_id ?>"/>
+                    <input type="file" name="image_id" id="image_id" value="<?= $image->filename ?>"/>
                     <span class="error"><?= error('image_id') ?></span>
                 </div>
 
@@ -124,7 +124,7 @@ try {
                     <?php
                     }
                     ?>
-                    <input type="file" name="image_id2" id="image_id2" value="<?= $product->image_id2 ?>"/>
+                    <input type="file" name="image_id2" id="image_id2" value="<?= $image2->filename ?>"/>
                     <span class="error"><?= error('image_id2') ?></span>
                 </div>
 
@@ -139,7 +139,7 @@ try {
                     <?php
                     }
                     ?>
-                    <input type="file" name="image_id3" id="image_id3" value="<?= $product->image_id3 ?>/>
+                    <input type="file" name="image_id3" id="image_id3" value="<?= $image3->filename ?>/>
                     <span class="error"><?= error('image_id3') ?></span>
                 </div>
               
@@ -153,7 +153,7 @@ try {
                     <?php
                     }
                     ?>
-                    <input type="file" name="image_id4" id="image_id4" value="<?= $product->image_id4 ?>/>
+                    <input type="file" name="image_id4" id="image_id4" value="<?= $image4->filename ?>/>
                     <span class="error"><?= error('image_id4') ?></span>
                 </div>
                

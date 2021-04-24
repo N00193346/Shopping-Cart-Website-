@@ -53,9 +53,6 @@ class Product {
                 throw new Exception("Database error executing database query: " . $message);
             }
 
-            if ($stmt->rowCount() !== 1) {
-                throw new Exception("Failed to save product.");
-            }
 
             if ($this->id === null) {
                 $this->id = $conn->lastInsertId();
