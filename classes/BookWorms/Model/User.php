@@ -45,10 +45,7 @@ class User {
                 throw new Exception("Database error executing database query: " . $message);
             }
 
-            if ($stmt->rowCount() !== 1) {
-                throw new Exception("Failed to save user.");
-            }
-
+         
             if ($this->id === null) {
                 $this->id = $conn->lastInsertId();
             }
@@ -164,6 +161,7 @@ class User {
                 $user->password = $row['password'];
                 $user->name = $row['name'];
                 $user->role_id = $row['role_id'];
+                $user->image_id = $row['image_id'];
             }
         }
         finally {

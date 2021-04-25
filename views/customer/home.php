@@ -119,7 +119,7 @@ $customer = Customer::findByUserId($user->id);
      
     </tbody>
     </table>
-    <a class="btn" href="<?= APP_URL ?>/actions/profile-edit.php?id=<?= $customer->id ?>">Edit Profile</a>
+    <a class="btn" href="<?= APP_URL ?>/views/customer/profile-edit.php?id=<?= $user->id ?>">Edit Profile</a>
         
     <div class="space__xl">  </div>
 

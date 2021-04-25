@@ -41,9 +41,6 @@ class Customer {
                 throw new Exception("Database error executing database query: " . $message);
             }
 
-            if ($stmt->rowCount() !== 1) {
-                throw new Exception("Failed to save customer.");
-            }
 
             if ($this->id === null) {
                 $this->id = $conn->lastInsertId();
