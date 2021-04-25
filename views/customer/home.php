@@ -1,5 +1,10 @@
 <?php require_once '../../config.php'; ?>
 <?php
+
+use BookWorms\Model\Image;
+use BookWorms\Model\User;
+use BookWorms\Model\Customer;
+
 if (!$request->is_logged_in()) {
   $request->redirect("/views/auth/login-form.php");
 }
@@ -7,6 +12,9 @@ $role = $request->session()->get("role");
 if ($role !== "customer") {
   $request->redirect("/actions/logout.php");
 }
+
+$email = $request->session()->get("email");
+$user = User::findByEmail($email);
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,6 +38,28 @@ if ($role !== "customer") {
           <p class="lead">
             Hello, <?= $request->session()->get("name") ?>
           </p>
+          <br>
+              <hr>
+              <?php
+              try {
+                $image = Image::findById($customer->image_id);
+              } catch (Exception $e) {
+              }
+              if ($image !== null) {
+              ?>
+                <img src="<?= APP_URL . "/actions/" . $image->filename ?>" width="205px" alt="image" class="mt-2 mb-2" />
+              <?php
+              }
+              ?>
+              <p><strong>Address: </strong><?= $customer->address ?></p>
+              <p><strong>Phone: </strong><?= $customer->phone ?></p>
+              <hr>
+            </div>
+        </div>
+
+        <div class="featured">
+    
+        
         </div>
 
         <div class="cart margin">

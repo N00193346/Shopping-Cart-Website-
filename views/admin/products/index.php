@@ -7,6 +7,7 @@ $numProducts = count($products);
 $pageSize = 10;
 $numPages = ceil($numProducts / $pageSize);
 ?>
+
 <table class="table" id="table-products">
     <thead>
         <tr>
@@ -27,11 +28,12 @@ $numPages = ceil($numProducts / $pageSize);
                 <td><?= $product->model ?></td>
                 <td>€<?= $product->price ?></td>
                 <td><a class="btn btn-primary" href="<?= APP_URL ?>views/admin/product-edit.php?id=<?= $product->id ?>">Edit</a></td>
-                <td><a class="btn btn-danger btn-delete" href="<?= APP_URL ?>/actions/product-delete.php?id=<?= $product->id ?>">Delete</a></td>
+                <td><a class="btn btn-danger confirmation" href="<?= APP_URL ?>/actions/product-delete.php?id=<?= $product->id ?>">Delete</a></td>
+                <script src="<?= APP_URL ?>/assets/js/deletequery.js"></script>
             </tr>
         <?php } ?>
        
-     
+   
     </tbody>
 </table>
 <nav id="nav-products">

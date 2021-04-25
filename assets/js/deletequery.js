@@ -1,12 +1,10 @@
-window.addEventListener('load', function (event) {
- 
-   
-    const delete_btn = document.getElementsByClassName('btn-delete')[0];
-    delete_btn.addEventListener("click", function (event) {
-      if (!confirm("Are you sure you want to delete this Product?")) {
-        event.preventDefault();
-      }
-    });
-   
-  })
-  
+
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure you want to delete this product?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+
+

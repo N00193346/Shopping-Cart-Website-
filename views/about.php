@@ -1,23 +1,28 @@
 <?php require_once '../config.php'; ?>
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Book Worms - About us</title>
-
-    <link href="<?= APP_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?= APP_URL ?>/assets/css/template.css" rel="stylesheet">
-  </head>
+<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/mystyle.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+       
+		<title>CA2</title>
+	</head>
   <body>
-    <div class="container">
-      <?php require 'include/header.php'; ?>
+   
       <?php require 'include/navbar.php'; ?>
       <?php require 'include/flash.php'; ?>
-      <main role="main">
+      <main role="">
+      <div class="space__xl"></div>
         <div>
           <h1>About us</h1>
-          
+          <div class="space__xl"></div>
           <div class="row">
             <div class="col">
               <p class="lead">
@@ -66,7 +71,7 @@
               <img src="<?= APP_URL ?>/assets/img/cart.png" />
             </div>
           </div>
-        </div>
+      
       </main>
       <?php require 'include/footer.php'; ?>
     </div>

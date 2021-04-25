@@ -8,7 +8,9 @@ use BookWorms\Model\Image;
 try {
     $request->session()->forget("flash_data");
     $request->session()->forget("flash_errors");
-    $products = Product::findAll();
+    
+$price = 1000;
+$products = Product::findByLessThanPrice($price);
 }
 catch (Exception $ex){
     $request->session()->set("flash_message", $ex->getMessage());

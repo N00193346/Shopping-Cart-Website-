@@ -28,18 +28,18 @@ if ($cart->empty()) {
 try {
 //Get Customer Id from sessions
   $customer_id = $request->session()->get("customer_id");
-//   $rules = [
-//     "type" => "present",
-//     "name" => "present|minlength:4|maxlength:64",
-//     "card_number" => "present|minlength:12|maxlength:12",
-//     "cvc" => "present|minlength:3|maxlength:3",
-//     "exp_month" => "present|minlength:2|maxlength:2",
-//     "exp_year" => "present|minlength:2|maxlength:4"
-//   ];
-//   $request->validate($rules);
+  $rules = [
+    "type" => "present",
+    "name" => "present|minlength:4|maxlength:64",
+    "card_number" => "present|minlength:12|maxlength:12|integer",
+    "cvc" => "present|minlength:3|maxlength:3|integer",
+    "exp_month" => "present|minlength:2|maxlength:2|integer",
+    "exp_year" => "present|minlength:2|maxlength:4|integer"
+  ];
+  $request->validate($rules);
 
 
-//  if ($request->is_valid()) {
+ if ($request->is_valid()) {
   //Getting variables from passed form 
     $id = $request->input("id");
     $type = $request->input("type");
@@ -106,6 +106,8 @@ foreach ($cart->items as $item) {
     $order_details->save();
   }
 
+ 
+
 
   $request->session()->set("flash_message", "Purchase Completed");
   $request->session()->set("flash_message_class", "alert-info");
@@ -116,7 +118,14 @@ foreach ($cart->items as $item) {
 
   $request->redirect("views/customer/home.php");
   }
-// }
+
+  else {
+    $request->session()->set("flash_data", $request->all());
+    $request->session()->set("flash_errors", $request->errors());
+
+    $request->redirect("/views/checkout.php");
+}
+}
   catch(Exception $ex) {
   $request->session()->set("flash_message", $ex->getMessage());
   $request->session()->set("flash_message_class", "alert-warning");

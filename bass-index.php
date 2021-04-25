@@ -47,8 +47,8 @@ catch (Exception $ex){
 <!--    Product Cards-->
         <div class="products">
         <?php foreach ($products as $product) { ?>
-          <a href="view-product.php?id=<?= $product->id?>">
-            <div class="product__card">
+          <a href="view-product.php?id=<?= $product->id?>" class="product__card">
+         
             <?php $image = Image::findById($product->image_id);
                if ($image !== null){
             ?>
@@ -69,7 +69,7 @@ catch (Exception $ex){
                     <?php  } 
                     ?>
         
-            </div>
+           
             </a>
             <?php  } 
             ?>

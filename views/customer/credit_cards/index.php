@@ -15,6 +15,7 @@ $numPages = ceil($numCredit_cards / $pageSize);
             <th>Card Number</th>
             <th>Expiry Month</th>
             <th>Expiry Year</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@ $numPages = ceil($numCredit_cards / $pageSize);
                 <td><?= $credit_card->card_number ?></td>
                 <td><?= $credit_card->exp_month ?></td>
                 <td><?= $credit_card->exp_year ?></td>
+                <td><a class="btn btn-danger confirmation" href="<?= APP_URL ?>/actions/card-delete.php?id=<?= $credit_card->id ?>">Delete this card</a></td>
             </tr>
         <?php } ?>
     </tbody>

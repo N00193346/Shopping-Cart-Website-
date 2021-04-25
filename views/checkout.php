@@ -41,9 +41,9 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
       <?php require 'include/navbar.php'; ?>
       <?php require 'include/flash.php'; ?>
 
-      <div class="featured">
+      <div class="checkout">
       <main role="main">
-        <div>
+     
           <h1>Checkout</h1>
 
           <div class="space__l"></div>
@@ -88,6 +88,7 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
                       <th>Expiry Month</th>
                       <th>Expiry Year</th>
                       <th></th>
+                      <th></th>
                   </tr>
               </thead>
               <!-- Cycle through the credit card info again to display to the user
@@ -111,18 +112,26 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
               <!-- Submit the hidden values -->
               <button type="submit" class="btn btn-primary">Use this Card</button> 
               </td>
+              <td>
+              <!-- Submit the hidden values -->
+              <a class="btn btn-danger confirmation" href="<?= APP_URL ?>/actions/card-delete.php?id=<?= $credit_card->id ?>">Delete this card</a>
+              </td>
+
               </form>
               <?php } ?>
               <?php } ?>
         
           </table>
         </div>
+      </div>
 
         <!-- Credit new card -->
+        <div class="checkout">
         <div class="col">
         <div class="space__l"></div>
+      
           <h1>Use new Card</h1>
-          <form method="post" action="<?= APP_URL ?>/actions/order-store.php" >
+          <form method="post" action="<?= APP_URL ?>/actions/order-store.php" name="cardInput">
                 <label for="type">Card type:</label>
                 <select class="form-control col-md6" name="type" id="type">
                   <option value="mastercard" <?= chosen("type", "mastercard") ? "selected" : "" ?>>Master Card</option>
@@ -133,31 +142,31 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
                   
                 <label for="name" class="mt-2">Name on card</label>
                 <div class="form-field">
-                    <input type="text" name="name" id="name" value="<?= old('name') ?>" />
+                    <input type="text" name="name" id="name" value="<?= old('name') ?>" required/>
                     <span class="error"><?= error('name') ?></span>
                 </div>
 
                 <label for="card_number" class="mt-2">Card Number</label>
                 <div class="form-field">
-                    <input type="text" name="card_number" id="card_number"  value="<?= old('card_number') ?>" />
+                    <input type="text" name="card_number" id="card_number" onsubmit="return checkInp()" maxlength="12" min="1" max="5" value="<?= old('card_number') ?>" required/>
                     <span class="error"><?= error('card_number') ?></span>
                 </div>
 
                 <label for="cvc" class="mt-2">Cvc</label>
                 <div class="form-field">
-                    <input type="password" name="cvc" id="cvc" value="<?= old('cvc') ?>" />
+                    <input type="password" name="cvc" id="cvc" maxlength="3" size="3" value="<?= old('cvc') ?>" required/>
                     <span class="error"><?= error('cvc') ?></span>
                 </div>
 
                 <label for="exp_month" class="mt-2">Expiry Month</label>
                 <div class="form-field">
-                    <input type="text" name="exp_month" id="exp_month" value="<?= old('exp_month') ?>" />
+                    <input type="text" name="exp_month" id="exp_month"  maxlength="2" size="2" value="<?= old('exp_month') ?>" required/>
                     <span class="error"><?= error('exp_month') ?></span>
                 </div>
 
                 <label for="exp_year" class="mt-2">Expiry Year</label>
                 <div class="form-field">
-                    <input type="text" name="exp_year" id="exp_year" value="<?= old('exp_year') ?>" />
+                    <input type="text" name="exp_year" id="exp_year" maxlength="2" size="2" value="<?= old('exp_year') ?>" required/>
                     <span class="error"><?= error('exp_year') ?></span>
                 </div>
 
@@ -176,13 +185,14 @@ $credit_cards = CreditCard::findByCustomerId($customer_id);
             </form>
           </div>
      
-       
+          </div>  
 
         </div>
-      </main>
+     
       <?php require 'include/footer.php'; ?>
     </div>
-    <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script> 
+    <script src="<?= APP_URL ?>/assets/js/formValidation.js"></script>
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
