@@ -204,6 +204,7 @@ class User {
                 $user->password = $row['password'];
                 $user->name = $row['name'];
                 $user->role_id = $row['role_id'];
+                $user->image_id = $row['image_id'];
             }
         }
         finally {

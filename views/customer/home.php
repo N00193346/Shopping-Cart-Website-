@@ -15,6 +15,7 @@ if ($role !== "customer") {
 
 $email = $request->session()->get("email");
 $user = User::findByEmail($email);
+$customer = Customer::findByUserId($user->id); 
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,30 +39,8 @@ $user = User::findByEmail($email);
           <p class="lead">
             Hello, <?= $request->session()->get("name") ?>
           </p>
-          <br>
-              <hr>
-              <?php
-              try {
-                $image = Image::findById($customer->image_id);
-              } catch (Exception $e) {
-              }
-              if ($image !== null) {
-              ?>
-                <img src="<?= APP_URL . "/actions/" . $image->filename ?>" width="205px" alt="image" class="mt-2 mb-2" />
-              <?php
-              }
-              ?>
-              <p><strong>Address: </strong><?= $customer->address ?></p>
-              <p><strong>Phone: </strong><?= $customer->phone ?></p>
-              <hr>
-            </div>
-        </div>
-
-        <div class="featured">
+         
     
-        
-        </div>
-
         <div class="cart margin">
       <main role="breathe">
           <ul class="nav nav-tabs" id="tab" role="tablist">
@@ -103,10 +82,50 @@ $user = User::findByEmail($email);
            
           </div>
           
+
         
         </div>
       </main>
-      <?php require 'include/footer_stick.php'; ?>
+
+      <div class="featured">
+      <h1>Profile Information</div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Profile Picture</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <td><?= $user->name ?></td>
+                <td><?= $user->email ?></td>
+                <td><?= $customer->address ?></td>
+                <td><?= $customer->phone ?></td>
+                <td>
+                <?php
+                    $image = Image::findById($user->image_id);
+                    if ($image !== null){
+                    ?>
+                    <img src="<?= APP_URL . "/actions/". $image->filename ?>" width="150px" />
+                    <?php
+                    }
+                    ?>
+                  </td>
+                  
+     
+    </tbody>
+    </table>
+    <a class="btn" href="<?= APP_URL ?>/actions/profile-edit.php?id=<?= $customer->id ?>">Edit Profile</a>
+        
+    <div class="space__xl">  </div>
+
+           
+        </div>
+      <?php require 'include/footer.php'; ?>
     
  
     <script src="<?= APP_URL ?>/assets/js/orders.js"></script>
