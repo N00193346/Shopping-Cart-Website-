@@ -18,6 +18,7 @@
    
       <?php require 'include/navbar.php'; ?>
       <?php require 'include/flash.php'; ?>
+      <div class="featured">
       <main role="">
       <div class="space__xl"></div>
         <div>
@@ -73,8 +74,9 @@
           </div>
       
       </main>
-      <?php require 'include/footer.php'; ?>
+      </div>
     </div>
+    <?php require 'include/footer_stick.php'; ?>
     <script src="<?= APP_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= APP_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
   </body>

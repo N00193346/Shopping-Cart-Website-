@@ -22,7 +22,7 @@ try {
     ];
 
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = 'smtp.mailtrap.io';                     // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -50,20 +50,18 @@ try {
     $mail->Body    = $request->input("message");
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-    $mail->send();
-    echo 'Message has been sent';
+    require "include/flash.php";
+
     if ($mail->send()) {
-        $request->session()->set("flash_message", "Your message has been sent!");
+        $request->session()->set("flash_message", "Your message was sent successfully!");
         $request->session()->set("flash_message_class", "alert-info");
 
         $request->session()->forget("flash_data");
         $request->session()->forget("flash_errors");
-        
+
         $request->redirect("/views/contact.php");
     }
 
-
-    // echo 'Message has been sent';
 } catch (Exception $e) {
     $request->session()->set("flash_message", "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     $request->session()->set("flash_message_class", "alert-warning");

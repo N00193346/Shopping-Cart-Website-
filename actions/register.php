@@ -13,7 +13,7 @@ try {
     "email" => "present|email|minlength:7|maxlength:64",
     "password" => "present|minlength:8|maxlength:64",
     "address" => "present|minlength:10|maxlength:256",
-    "phone" => "present|minlength:4|maxlength:64"
+    "phone" => "present|minlength:4|maxlength:64|integer"
   ];
 
   $request->validate($rules);

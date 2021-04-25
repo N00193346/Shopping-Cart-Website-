@@ -13,10 +13,10 @@
                 <a class="nav-link" href="<?= APP_URL ?>">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?= APP_URL ?>views/about.php">About</a>
+                <a class="nav-link" href="<?= APP_URL ?>/views/about.php">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?= APP_URL ?>views/contact.php">Contact</a>
+                <a class="nav-link" href="<?= APP_URL ?>/views/contact.php">Contact</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
